@@ -164,4 +164,31 @@ ngx_http_vhost_traffic_status_replace_strc(ngx_str_t *buf,
     return NGX_OK;
 }
 
+
+ngx_int_t
+ngx_is_valid_utf8_str(u_char *p, size_t n)
+{
+    u_char  c, *last;
+    size_t  len;
+
+    last = p + n;
+
+    for (len = 0; p < last; len++) {
+
+        c = *p;
+
+        if (c < 0x80) {
+            p++;
+            continue;
+        }
+
+        if (ngx_utf8_decode(&p, n) > 0x10ffff) {
+            /* invalid UTF-8 */
+            return NGX_ERROR;
+        }
+    }
+    
+    return NGX_OK;
+}
+
 /* vi:set ft=c ts=4 sw=4 et fdm=marker: */
