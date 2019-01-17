@@ -197,13 +197,13 @@ ngx_int_t
 ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, size_t n)
 {
     u_char  c, *pb, *last, *prev;
-    size_t  len, size, len_encoded, tmp;
+    size_t  len, size;
 
     last = p + n;
 
     /* Hex encoding will be at least twice the size of original string*/
     buf->data = ngx_pcalloc(pool, n * 2);
-    len_encoded = 0;
+    size = 0;
 
     for (len = 0; p < last; len++) {
 
@@ -213,31 +213,31 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         if (c < 0x80) {
             p++;
             pb++;
-            len_encoded++;
+            size++;
             
             continue;
         }
 
-        prev = p
+        prev = p;
         if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
 
             while (prev != p) {
-                tmp = *p
+                c = *p
                 
-                pb = tmp >> 4;
+                pb = c >> 4;
                 pb++;
                 
-                pb = tmp & 0x0f;
+                pb = c & 0x0f;
                 pb++;
 
                 prev++;
-                len_encoded++;
+                size++;
             }
 
             continue;
         }
-        len_encoded++;
+        size++;
     }
     
     buf->len = len_encoded;
