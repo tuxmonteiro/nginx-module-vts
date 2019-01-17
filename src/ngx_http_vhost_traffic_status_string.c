@@ -249,7 +249,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
                 prev++;
                 size++;
             }
-            continue
+            continue;
         }
     }
     
