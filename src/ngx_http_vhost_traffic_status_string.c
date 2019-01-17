@@ -168,8 +168,8 @@ ngx_http_vhost_traffic_status_replace_strc(ngx_str_t *buf,
 ngx_int_t
 ngx_is_valid_utf8_str(u_char *p, size_t n)
 {
-    u_char  c, *last, *prev;
-    size_t  len, size;
+    u_char  c, *last;
+    size_t  len;
 
     last = p + n;
 
@@ -182,10 +182,8 @@ ngx_is_valid_utf8_str(u_char *p, size_t n)
             continue;
         }
 
-        prev = p
         if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
-            size = p - prev;
             return NGX_ERROR;
         }
     }
