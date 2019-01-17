@@ -238,7 +238,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         size++;
     }
     
-    buf->len = len_encoded;
+    buf->len = size;
     return NGX_OK;
 }
 
