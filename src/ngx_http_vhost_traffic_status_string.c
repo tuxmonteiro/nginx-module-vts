@@ -168,8 +168,8 @@ ngx_http_vhost_traffic_status_replace_strc(ngx_str_t *buf,
 ngx_int_t
 ngx_is_valid_utf8_str(u_char *p, size_t n)
 {
-    u_char  c, *last;
-    size_t  len;
+    u_char  c, *last, *prev;
+    size_t  len, size;
 
     last = p + n;
 
@@ -182,12 +182,65 @@ ngx_is_valid_utf8_str(u_char *p, size_t n)
             continue;
         }
 
+        prev = p
         if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
+            size = p - prev;
             return NGX_ERROR;
         }
     }
     
+    return NGX_OK;
+}
+
+ngx_int_t
+ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, size_t n)
+{
+    u_char  c, *pb, *last, *prev;
+    size_t  len, size, len_encoded, tmp;
+
+    last = p + n;
+
+    /* Hex encoding will be at least twice the size of original string*/
+    buf->data = ngx_pcalloc(pool, n * 2);
+    len_encoded = 0;
+
+    for (len = 0; p < last; len++) {
+
+        c = *p;
+        *pb = *p;
+
+        if (c < 0x80) {
+            p++;
+            pb++;
+            len_encoded++;
+            
+            continue;
+        }
+
+        prev = p
+        if (ngx_utf8_decode(&p, n) > 0x10ffff) {
+            /* invalid UTF-8 */
+
+            while (prev != p) {
+                tmp = *p
+                
+                pb = tmp >> 4;
+                pb++;
+                
+                pb = tmp & 0x0f;
+                pb++;
+
+                prev++;
+                len_encoded++;
+            }
+
+            continue;
+        }
+        len_encoded++;
+    }
+    
+    buf->len = len_encoded;
     return NGX_OK;
 }
 

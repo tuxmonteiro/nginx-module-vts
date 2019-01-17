@@ -126,6 +126,7 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *
     u_char *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                                  key;
+    ngx_str_t                                  hex_encoded_key;
     ngx_http_vhost_traffic_status_ctx_t       *ctx;
     ngx_http_vhost_traffic_status_node_t      *vtsn;
     ngx_http_vhost_traffic_status_loc_conf_t  *vtscf;
@@ -141,9 +142,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            if (ngx_is_valid_utf8_str(key.data, key.len) == NGX_OK) {
-                buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &key, vtsn);
-            }
+            hex_encoded_key = ngx_hex_encode_invalid_utf8_char(r->pool, &hex_encoded_key, key.data, key.len);
+            buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &hex_encoded_key, vtsn);
 
             /* calculates the sum */
             vtscf->stats.stat_request_counter += vtsn->stat_request_counter;
@@ -271,6 +271,7 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter(ngx_http_request_t *
     u_char *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                              key;
+    ngx_str_t                              hex_encoded_key;
     ngx_http_vhost_traffic_status_ctx_t   *ctx;
     ngx_http_vhost_traffic_status_node_t  *vtsn;
 
@@ -283,9 +284,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter(ngx_http_request_t *
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            if (ngx_is_valid_utf8_str(key.data, key.len) == NGX_OK) {
-                buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(r, buf, &key, vtsn);
-            }
+            hex_encoded_key = ngx_hex_encode_invalid_utf8_char(r->pool, &hex_encoded_key, key.data, key.len);
+            buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(r, buf, &hex_encoded_key, vtsn);
         }
 
         buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node->left);
@@ -393,6 +393,7 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream(ngx_http_request_t
     u_char *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                              key;
+    ngx_str_t                              hex_encoded_key;
     ngx_http_vhost_traffic_status_ctx_t   *ctx;
     ngx_http_vhost_traffic_status_node_t  *vtsn;
 
@@ -407,9 +408,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream(ngx_http_request_t
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            if (ngx_is_valid_utf8_str(key.data, key.len) == NGX_OK) {
-                buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(r, buf, &key, vtsn);
-            }
+            hex_encoded_key = ngx_hex_encode_invalid_utf8_char(r->pool, &hex_encoded_key, key.data, key.len);
+            buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(r, buf, &hex_encoded_key, vtsn);
         }
 
         buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node->left);
@@ -457,6 +457,7 @@ ngx_http_vhost_traffic_status_display_prometheus_set_cache(ngx_http_request_t *r
     u_char *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                              key;
+    ngx_str_t                              hex_encoded_key;
     ngx_http_vhost_traffic_status_ctx_t   *ctx;
     ngx_http_vhost_traffic_status_node_t  *vtsn;
 
@@ -469,10 +470,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_cache(ngx_http_request_t *r
             key.data = vtsn->data;
             key.len = vtsn->len;
 
-            if (ngx_is_valid_utf8_str(key.data, key.len) == NGX_OK) {
-                buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(r, buf,
-                                                                                  &key, vtsn);
-            }
+            hex_encoded_key = ngx_hex_encode_invalid_utf8_char(r->pool, &hex_encoded_key, key.data, key.len);
+            buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(r, buf, &hex_encoded_key, vtsn);
         }
 
         buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node->left);
@@ -489,6 +488,7 @@ u_char *
 ngx_http_vhost_traffic_status_display_prometheus_set(ngx_http_request_t *r,
     u_char *buf)
 {
+    ngx_str_t                                 hex_encoded_key;
     u_char                                    *o, *s;
     ngx_rbtree_node_t                         *node;
     ngx_http_vhost_traffic_status_ctx_t       *ctx;
@@ -514,11 +514,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set(ngx_http_request_t *r,
 #endif
     buf = ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node);
 
-    if (ngx_is_valid_utf8_str(vtscf->sum_key.data, vtscf->sum_key.len) == NGX_OK) {
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, 
-                                                                           &vtscf->sum_key,
-                                                                           &vtscf->stats);
-    }
+    hex_encoded_key = ngx_hex_encode_invalid_utf8_char(r->pool, &hex_encoded_key, vtscf->sum_key.data, vtscf->sum_key.len);
+    buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &hex_encoded_key, &vtscf->stats);
     
     /* filterZones */
     o = buf;

@@ -21,6 +21,9 @@ ngx_int_t ngx_http_vhost_traffic_status_replace_strc(ngx_str_t *buf,
     ngx_str_t *dst, u_char c);
 ngx_int_t ngx_is_valid_utf8_str(u_char *p, size_t n);
 
+ngx_int_t ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, 
+	u_char *p, size_t n);
+
 #endif /* _NGX_HTTP_VTS_STRING_H_INCLUDED_ */
 
 /* vi:set ft=c ts=4 sw=4 et fdm=marker: */
