@@ -241,11 +241,11 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
                     *pb = *p;
                 } else {
                     *pb = '\\';
-                    *pb++;
+                    pb++;
                     size++;
                     *pb = *p;
                 }
-                *pb++;
+                pb++;
                 prev++;
                 size++;
             }
