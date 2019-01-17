@@ -207,9 +207,8 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     for (len = 0; p < last; len++) {
 
         c = *p;
-        *pb = *p;
-
         if (c < 0x80) {
+            *pb = *p;
             p++;
             pb++;
             size++;
@@ -235,8 +234,23 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
             }
 
             continue;
+
+        } else {
+            while (prev != p) {
+                if (*p != '"') {
+                    *pb = *p;
+                } else {
+                    *pb = '\\';
+                    *pb++;
+                    size++;
+                    *pb = *p;
+                }
+                *pb++;
+                prev++;
+                size++;
+            }
+            continue
         }
-        size++;
     }
     
     buf->len = size;
