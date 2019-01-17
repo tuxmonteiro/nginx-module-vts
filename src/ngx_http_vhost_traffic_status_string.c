@@ -223,10 +223,10 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
             while (prev != p) {
                 c = *p;
                 
-                pb = (u_int)c >> 4;
+                pb = (u_char)(c >> 4);
                 pb++;
                 
-                pb = (u_int)c & 0x0f;
+                pb = (u_char)(c & 0x0f);
                 pb++;
 
                 prev++;
