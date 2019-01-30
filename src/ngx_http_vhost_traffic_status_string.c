@@ -258,7 +258,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     size_t  len, size;
 
     last = p + n;
-    char HEX_MAP[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    static u_char   HEX_MAP[] = "0123456789ABCDEF";
 
     /* Hex encoding will be at least twice the size of original string*/
     buf->data = ngx_pcalloc(pool, n * 4);
@@ -266,48 +266,48 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     //buf->data = ngx_sprintf(buf->data, "%s", p);
     //ngx_stream_log_escape(buf->data, p, n);
 
-    static u_char   hex[] = "0123456789ABCDEF";
+    // static u_char   hex[] = "0123456789ABCDEF";
 
-    static uint32_t   escape[] = {
-        0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
+    // static uint32_t   escape[] = {
+    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
 
-                    /* ?>=< ;:98 7654 3210  /.-, +*)( '&%$ #"!  */
-        0x00000004, /* 0000 0000 0000 0000  0000 0000 0000 0100 */
+    //                 /* ?>=< ;:98 7654 3210  /.-, +*)( '&%$ #"!  */
+    //     0x00000004, /* 0000 0000 0000 0000  0000 0000 0000 0100 */
 
-                    /* _^]\ [ZYX WVUT SRQP  ONML KJIH GFED CBA@ */
-        0x10000000, /* 0001 0000 0000 0000  0000 0000 0000 0000 */
+    //                 /* _^]\ [ZYX WVUT SRQP  ONML KJIH GFED CBA@ */
+    //     0x10000000,  0001 0000 0000 0000  0000 0000 0000 0000 
 
-                    /*  ~}| {zyx wvut srqp  onml kjih gfed cba` */
-        0x80000000, /* 1000 0000 0000 0000  0000 0000 0000 0000 */
+    //                 /*  ~}| {zyx wvut srqp  onml kjih gfed cba` */
+    //     0x80000000,  1000 0000 0000 0000  0000 0000 0000 0000 
 
-        0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-        0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-        0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-        0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-    };
+    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
+    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
+    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
+    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
+    // };
 
-    size = 0;
-    pb = buf->data;
+    // size = 0;
+    // pb = buf->data;
 
-    while (n) {
-        if (escape[*p >> 5] & (1U << (*p & 0x1f))) {
-            *pb++ = '\\';
-            *pb++ = 'x';
-            *pb++ = hex[*p >> 4];
-            *pb++ = hex[*p & 0xf];
-            p++;
-            size = size + 4;
+    // while (n) {
+    //     if (escape[*p >> 5] & (1U << (*p & 0x1f))) {
+    //         *pb++ = '\\';
+    //         *pb++ = 'x';
+    //         *pb++ = hex[*p >> 4];
+    //         *pb++ = hex[*p & 0xf];
+    //         p++;
+    //         size = size + 4;
 
-        } else {
-            *pb++ = *p++;
-        }
-        n--;
-        size++;
-    }
+    //     } else {
+    //         *pb++ = *p++;
+    //     }
+    //     n--;
+    //     size++;
+    // }
 
-    buf->len = size;
+    // buf->len = size;
 
-    return NGX_OK;
+    // return NGX_OK;
 
     size = 0;
     pb = buf->data;
@@ -333,16 +333,12 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
             *pb = 'x';
             pb++;
             while (prev != p) {
-                c = *p;
-                
-                *pb = HEX_MAP[c >> 4];
-                pb++;
-                
-                *pb = HEX_MAP[c & 0x0f];
-                pb++;
+                c = *p;      
+                *pb++ = HEX_MAP[c >> 4];
+                *pb++ = HEX_MAP[c & 0x0f];
 
                 prev++;
-                size++;
+                size = size + 4;
             }
 
             continue;
@@ -351,15 +347,16 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
             while (prev != p) {
                 if (*p != '"') {
                     *pb = *p;
+                    size++;
                 } else {
                     *pb = '\\';
                     pb++;
                     size++;
                     *pb = *p;
+                    size = size + 4;
                 }
                 pb++;
                 prev++;
-                size++;
             }
             continue;
         }
