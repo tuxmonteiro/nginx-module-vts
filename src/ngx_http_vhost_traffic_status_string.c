@@ -194,15 +194,17 @@ ngx_is_valid_utf8_str(u_char *p, size_t n)
 ngx_int_t
 ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, size_t n)
 {
-    u_char  c, *pb, *last, *prev;
+    u_char  c, *pb, *last, *prev, *original, *last_char;
     size_t  len, size;
 
     last = p + n;
+    original = p;    
 
     /* Hex encoding will be at least twice the size of original string*/
     buf->data = ngx_pcalloc(pool, n * 3);
     size = 0;
     pb = buf->data;
+    last_char = &(pb[n * 3 - 1]);
 
     for (len = 0; p < last; len++) {
 
@@ -219,25 +221,27 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         prev = p;
         if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
+            ngx_slprintf(pb, last_char, "*%uA ", original);
 
-            *pb = '\\';
-            pb++;
-            while (prev != p) {
-                c = *p;
+            // *pb = '\\';
+            // pb++;
+            // while (prev != p) {
+            //     c = *p;
                 
-                //*pb = c >> 4;
-                //pb++;
+            //     //*pb = c >> 4;
+            //     //pb++;
                 
-                //*pb = c & 0x0f;
-                //pb++;
-                *pb = c;
-                pb++;
+            //     //*pb = c & 0x0f;
+            //     //pb++;
+            //     *pb = c;
+            //     pb++;
 
-                prev++;
-                size++;
-            }
+            //     prev++;
+            //     size++;
+            // }
 
-            continue;
+            // continue;
+            return NGX_OK;
 
         } else {
             while (prev != p) {
