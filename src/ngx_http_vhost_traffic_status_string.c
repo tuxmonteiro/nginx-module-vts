@@ -296,6 +296,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
             *pb++ = hex[*p >> 4];
             *pb++ = hex[*p & 0xf];
             p++;
+            size = size + 4;
 
         } else {
             *pb++ = *p++;
