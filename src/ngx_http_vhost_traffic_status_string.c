@@ -199,7 +199,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
 
     last = p + n;
     original = p;
-    char HEX_MAP[] = char['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+    char HEX_MAP[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
     /* Hex encoding will be at least twice the size of original string*/
     buf->data = ngx_pcalloc(pool, n * 3);
