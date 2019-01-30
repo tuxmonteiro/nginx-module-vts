@@ -200,7 +200,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     last = p + n;
 
     /* Hex encoding will be at least twice the size of original string*/
-    buf->data = ngx_pcalloc(pool, n * 2);
+    buf->data = ngx_pcalloc(pool, n * 3);
     size = 0;
     pb = buf->data;
 
@@ -220,6 +220,8 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
 
+            *pb = '\\';
+            pb++;
             while (prev != p) {
                 c = *p;
                 
