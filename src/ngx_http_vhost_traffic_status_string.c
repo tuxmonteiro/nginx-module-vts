@@ -6,7 +6,6 @@
 
 #include <ngx_config.h>
 #include <ngx_core.h>
-#include <ngx_stream_log_module.c>
 
 #include "ngx_http_vhost_traffic_status_string.h"
 
