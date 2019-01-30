@@ -203,7 +203,7 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     /* Hex encoding will be at least twice the size of original string*/
     buf->data = ngx_pcalloc(pool, n * 4);
 
-    ngx_sprintf(buf->data, "%X", p);
+    buf->data = ngx_sprintf(buf->data, "%ux", p);
     return NGX_OK;
 
     size = 0;
