@@ -193,7 +193,7 @@ ngx_is_valid_utf8_str(u_char *p, size_t n)
 
 
 ngx_int_t
-ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_log_t *log, ngx_str_t *buf, u_char *p, size_t n)
+ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, size_t n)
 {
     u_char  c, *pb, *last, *prev;
     size_t  len, size;
@@ -208,21 +208,21 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_log_t *log, ngx_str_t *bu
 
     for (len = 0; p < last; len++) {
 
-        c = *p;
-        if (c < 0x80) {
-            *pb = *p;
-            p++;
-            pb++;
-            size++;
+        if (*p < 0x80) {
+            if (*p == '"') {
+                *pb++ = '\\';
+                *pb++ = *p++;
+                size = size + 2;
+            } else {
+                *pb++ = *p++;
+                size++;
+            }
             
             continue;
         }
 
         prev = p;
-        return_value = ngx_utf8_decode(&p, n);
-        ngx_log_error(NGX_LOG_ERR, log, 0,
-                      "Return Value: [\"%ui\"], P's value:  [\"%V\"]", return_value, &p);
-        if (return_value > 0x10ffff) {
+        if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
 
             if (prev < p) {
@@ -239,15 +239,8 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_log_t *log, ngx_str_t *bu
 
         } else {
             while (prev < p) {
-                if (*p == '"') {
-                    *pb++ = '\\';
-                    *pb = *p;
-                    size = size + 2;
-                } else {
-                    *pb++ = *p;
-                    size++;
-                }
-                prev++;
+                *pb++ = *prev++;
+                size++;
             }
 
             continue;
