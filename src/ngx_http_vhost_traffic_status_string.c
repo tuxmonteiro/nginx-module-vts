@@ -328,16 +328,12 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         if (ngx_utf8_decode(&p, n) > 0x10ffff) {
             /* invalid UTF-8 */
 
-            *pb = '\\';
-            pb++;
-            *pb = 'x';
-            pb++;
             while (prev != p) {
-                c = *p;      
+                c = *prev++;
+                *pb++ = '\\';
+                *pb++ = 'x'; 
                 *pb++ = HEX_MAP[c >> 4];
                 *pb++ = HEX_MAP[c & 0x0f];
-
-                prev++;
                 size = size + 4;
             }
 
