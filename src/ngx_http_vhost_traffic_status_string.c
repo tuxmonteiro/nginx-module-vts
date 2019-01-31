@@ -192,122 +192,16 @@ ngx_is_valid_utf8_str(u_char *p, size_t n)
 }
 
 
-// static uintptr_t
-// ngx_prometheus_log_escape(u_char *dst, u_char *src, size_t size)
-// {
-//     ngx_uint_t      n;
-//     static u_char   hex[] = "0123456789ABCDEF";
-
-//     static uint32_t   escape[] = {
-//         0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-
-//                     /* ?>=< ;:98 7654 3210  /.-, +*)( '&%$ #"!  */
-//         0x00000004, /* 0000 0000 0000 0000  0000 0000 0000 0100 */
-
-//                     /* _^]\ [ZYX WVUT SRQP  ONML KJIH GFED CBA@ */
-//         0x10000000, /* 0001 0000 0000 0000  0000 0000 0000 0000 */
-
-//                     /*  ~}| {zyx wvut srqp  onml kjih gfed cba` */
-//         0x80000000, /* 1000 0000 0000 0000  0000 0000 0000 0000 */
-
-//         0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-//         0xffffffff,  1111 1111 1111 1111  1111 1111 1111 1111 
-//         0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-//         0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-//     };
-
-
-//     if (dst == NULL) {
-
-//         /* find the number of the characters to be escaped */
-
-//         n = 0;
-
-//         while (size) {
-//             if (escape[*src >> 5] & (1U << (*src & 0x1f))) {
-//                 n++;
-//             }
-//             src++;
-//             size--;
-//         }
-
-//         return (uintptr_t) n;
-//     }
-
-//     while (size) {
-//         if (escape[*src >> 5] & (1U << (*src & 0x1f))) {
-//             *dst++ = '\\';
-//             *dst++ = 'x';
-//             *dst++ = hex[*src >> 4];
-//             *dst++ = hex[*src & 0xf];
-//             src++;
-
-//         } else {
-//             *dst++ = *src++;
-//         }
-//         size--;
-//     }
-
-//     return (uintptr_t) dst;
-// }
-
 ngx_int_t
-ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, size_t n)
+ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_log_t *log, ngx_str_t *buf, u_char *p, size_t n)
 {
     u_char  c, *pb, *last, *prev;
     size_t  len, size;
+    u_char   HEX_MAP[] = "0123456789ABCDEF";
+    uint32_t return_value;
 
     last = p + n;
-    static u_char   HEX_MAP[] = "0123456789ABCDEF";
-
-    /* Hex encoding will be at least twice the size of original string*/
     buf->data = ngx_pcalloc(pool, n * 4);
-
-    //buf->data = ngx_sprintf(buf->data, "%s", p);
-    //ngx_stream_log_escape(buf->data, p, n);
-
-    // static u_char   hex[] = "0123456789ABCDEF";
-
-    // static uint32_t   escape[] = {
-    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-
-    //                 /* ?>=< ;:98 7654 3210  /.-, +*)( '&%$ #"!  */
-    //     0x00000004, /* 0000 0000 0000 0000  0000 0000 0000 0100 */
-
-    //                 /* _^]\ [ZYX WVUT SRQP  ONML KJIH GFED CBA@ */
-    //     0x10000000,  0001 0000 0000 0000  0000 0000 0000 0000 
-
-    //                 /*  ~}| {zyx wvut srqp  onml kjih gfed cba` */
-    //     0x80000000,  1000 0000 0000 0000  0000 0000 0000 0000 
-
-    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-    //     0xffffffff, /* 1111 1111 1111 1111  1111 1111 1111 1111 */
-    // };
-
-    // size = 0;
-    // pb = buf->data;
-
-    // while (n) {
-    //     if (escape[*p >> 5] & (1U << (*p & 0x1f))) {
-    //         *pb++ = '\\';
-    //         *pb++ = 'x';
-    //         *pb++ = hex[*p >> 4];
-    //         *pb++ = hex[*p & 0xf];
-    //         p++;
-    //         size = size + 4;
-
-    //     } else {
-    //         *pb++ = *p++;
-    //     }
-    //     n--;
-    //     size++;
-    // }
-
-    // buf->len = size;
-
-    // return NGX_OK;
 
     size = 0;
     pb = buf->data;
@@ -325,7 +219,10 @@ ngx_hex_encode_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         }
 
         prev = p;
-        if (ngx_utf8_decode(&p, n) > 0x10ffff) {
+        return_value = ngx_utf8_decode(&p, n);
+        ngx_log_error(NGX_LOG_ERR, log, 0,
+                      "Return Value: [\"%ui\"], P's value:  [\"%V\"]", return_value, &p);
+        if (return_value > 0x10ffff) {
             /* invalid UTF-8 */
 
             if (prev < p) {
