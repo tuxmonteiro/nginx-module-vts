@@ -171,7 +171,6 @@ ngx_hex_escape_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     u_char  c, *pb, *last, *prev;
     size_t  len, size;
     u_char   HEX_MAP[] = "0123456789ABCDEF";
-    uint32_t return_value;
 
     last = p + n;
     buf->data = ngx_pcalloc(pool, n * 5);
@@ -182,9 +181,14 @@ ngx_hex_escape_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
     for (len = 0; p < last; len++) {
 
         if (*p < 0x80) {
-            if (*p == '"') {
+            if (*p == '"' || *p == '\\') {
                 *pb++ = '\\';
                 *pb++ = *p++;
+                size = size + 2;
+            } else if (*p == '\n') {
+                *pb++ = '\\';
+                *pb++ = 'n';
+                p++;
                 size = size + 2;
             } else {
                 *pb++ = *p++;
