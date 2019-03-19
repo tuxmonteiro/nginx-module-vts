@@ -168,61 +168,82 @@ ngx_http_vhost_traffic_status_replace_strc(ngx_str_t *buf,
 ngx_int_t
 ngx_hex_escape_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, size_t n)
 {
-    u_char  c, *pb, *last, *prev;
-    size_t  len, size;
-    u_char   HEX_MAP[] = "0123456789ABCDEF";
+    u_char  c, *pa, *pb, *last, *char_end;
+    size_t  size;
+    u_char  HEX_MAP[] = "0123456789ABCDEF";
 
     last = p + n;
-    buf->data = ngx_pcalloc(pool, n * 5);
-
+    pa = p;
     size = 0;
-    pb = buf->data;
 
-    for (len = 0; p < last; len++) {
+    /* Find the first character that needs to be escaped */
+    while (pa < last) {
+        if (*pa >= 0x80 || *pa == '"' || *pa == '\\' || pa == '\n') {
+            break;
+        }
+        pa++;
+        size++;
+    }
 
-        if (*p < 0x80) {
-            if (*p == '"' || *p == '\\') {
+    if (pa == last) {
+        // no escapes required - return the original string
+        buf->data = p;
+        buf->len = n;
+        return NGX_OK;
+    }
+
+    /* Allocate enough space for the unescaped prefix and worst case for remainder */
+    buf->data = ngx_pcalloc(pool, size + (n - size) * 5);
+    if (buf->data == NULL) {
+        /*
+            Return the unescaped string up to the first special character 
+            in case the caller does not handle the error.
+        */
+        buf->data = p;
+        buf->len = size;
+        return NGX_ERROR;
+    }
+
+    /* Copy `size` unescaped characters to start of destination. */
+    pb = ngx_copy(buf->data, p, size);
+
+    /* Individually copy remaining characters to destination, escaping as necessary */
+    while (pa < last) {
+
+        if (*pa < 0x80) {
+            if (*pa == '"' || *pa == '\\') {
                 *pb++ = '\\';
-                *pb++ = *p++;
+                *pb++ = *pa++;
                 size = size + 2;
-            } else if (*p == '\n') {
+            } else if (*pa == '\n') {
                 *pb++ = '\\';
                 *pb++ = 'n';
-                p++;
+                pa++;
                 size = size + 2;
             } else {
-                *pb++ = *p++;
+                *pb++ = *pa++;
                 size++;
             }
 
             continue;
         }
 
-        prev = p;
-        if (ngx_utf8_decode(&p, n) > 0x10ffff) {
-            /* invalid UTF-8 */
-
-            if (prev < p) {
-                c = *prev++;
-                /* two slashes are required to be valid encoding for prometheus*/
-                *pb++ = '\\';
-                *pb++ = '\\';
-                *pb++ = 'x';
-                *pb++ = HEX_MAP[c >> 4];
-                *pb++ = HEX_MAP[c & 0x0f];
-                size = size + 5;
-                p = prev;
-            }
-
-            continue;
-
+        char_end = pa;
+        if (ngx_utf8_decode(&char_end, last - pa) > 0x10ffff) {
+            /* invalid UTF-8 - escape single char to allow resynchronization */
+            c = *pa++;
+            /* two slashes are required to be valid encoding for prometheus*/
+            *pb++ = '\\';
+            *pb++ = '\\';
+            *pb++ = 'x';
+            *pb++ = HEX_MAP[c >> 4];
+            *pb++ = HEX_MAP[c & 0x0f];
+            size = size + 5;
         } else {
-            while (prev < p) {
-                *pb++ = *prev++;
+            while (pa < char_end) {
+                *pb++ = *pa++;
                 size++;
             }
-
-            continue;
         }
     }
 
