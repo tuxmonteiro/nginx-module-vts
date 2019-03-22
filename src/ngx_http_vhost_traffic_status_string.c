@@ -3,6 +3,7 @@
  * Copyright (C) YoungJoo Kim (vozlt)
  */
 
+#include <ctype.h>
 
 #include <ngx_config.h>
 #include <ngx_core.h>
@@ -178,11 +179,20 @@ ngx_hex_escape_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
 
     /* Find the first character that needs to be escaped */
     while (pa < last) {
-        if (*pa >= 0x80 || *pa == '"' || *pa == '\\' || pa == '\n') {
-            break;
+        if isascii(*pa) {
+            if (*pa == '"' || *pa == '\\' || *pa == '\n') {
+                break;
+            } else {
+                pa++;
+            }
+        } else {
+            char_end = pa;
+            if (ngx_utf8_decode(&char_end, last - pa) > 0x10ffff) {
+                break;
+            } else {
+                pa = char_end;
+            }
         }
-        pa++;
-        size++;
     }
 
     if (pa == last) {
@@ -191,6 +201,8 @@ ngx_hex_escape_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
         buf->len = n;
         return NGX_OK;
     }
+
+    size = pa - p;
 
     /* Allocate enough space for the unescaped prefix and worst case for remainder */
     buf->data = ngx_pcalloc(pool, size + (n - size) * 5);
@@ -209,40 +221,37 @@ ngx_hex_escape_invalid_utf8_char(ngx_pool_t *pool, ngx_str_t *buf, u_char *p, si
 
     /* Individually copy remaining characters to destination, escaping as necessary */
     while (pa < last) {
-
-        if (*pa < 0x80) {
+        if (isascii(*pa)) {
             if (*pa == '"' || *pa == '\\') {
                 *pb++ = '\\';
                 *pb++ = *pa++;
-                size = size + 2;
+                size += 2;
             } else if (*pa == '\n') {
                 *pb++ = '\\';
                 *pb++ = 'n';
                 pa++;
-                size = size + 2;
+                size += 2;
             } else {
                 *pb++ = *pa++;
                 size++;
             }
-
-            continue;
-        }
-
-        char_end = pa;
-        if (ngx_utf8_decode(&char_end, last - pa) > 0x10ffff) {
-            /* invalid UTF-8 - escape single char to allow resynchronization */
-            c = *pa++;
-            /* two slashes are required to be valid encoding for prometheus*/
-            *pb++ = '\\';
-            *pb++ = '\\';
-            *pb++ = 'x';
-            *pb++ = HEX_MAP[c >> 4];
-            *pb++ = HEX_MAP[c & 0x0f];
-            size = size + 5;
         } else {
-            while (pa < char_end) {
-                *pb++ = *pa++;
-                size++;
+            char_end = pa;
+            if (ngx_utf8_decode(&char_end, last - pa) > 0x10ffff) {
+                /* invalid UTF-8 - escape single char to allow resynchronization */
+                c = *pa++;
+                /* two slashes are required to be valid encoding for prometheus*/
+                *pb++ = '\\';
+                *pb++ = '\\';
+                *pb++ = 'x';
+                *pb++ = HEX_MAP[c >> 4];
+                *pb++ = HEX_MAP[c & 0x0f];
+                size += 5;
+            } else {
+                while (pa < char_end) {
+                    *pb++ = *pa++;
+                    size++;
+                }
             }
         }
     }
