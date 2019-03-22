@@ -9,9 +9,9 @@
 #include "ngx_http_vhost_traffic_status_display_prometheus.h"
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_main(ngx_http_request_t *r,
-    u_char *buf)
+    ngx_buf_t *buf)
 {
     ngx_atomic_int_t                           ap, hn, ac, rq, rd, wr, wa;
     ngx_http_vhost_traffic_status_loc_conf_t  *vtscf;
@@ -29,26 +29,28 @@ ngx_http_vhost_traffic_status_display_prometheus_set_main(ngx_http_request_t *r,
 
     shm_info = ngx_pcalloc(r->pool, sizeof(ngx_http_vhost_traffic_status_shm_info_t));
     if (shm_info == NULL) {
-        return buf;
+        return NGX_OK;
     }
 
     ngx_http_vhost_traffic_status_shm_info(r, shm_info);
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_MAIN, &ngx_cycle->hostname,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_MAIN,
+                      &ngx_cycle->hostname,
                       NGINX_VERSION,
                       (double) vtscf->start_msec / 1000,
                       ap, ac, hn, rd, rq, wa, wr,
                       shm_info->name, shm_info->max_size,
                       shm_info->used_size, shm_info->used_node);
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_server_node(
     ngx_http_request_t *r,
-    u_char *buf, ngx_str_t *key,
+    ngx_buf_t *buf, ngx_str_t *key,
     ngx_http_vhost_traffic_status_node_t *vtsn)
 {
     ngx_str_t                                               server;
@@ -62,7 +64,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server_node(
 
     (void) ngx_http_vhost_traffic_status_node_position_key(&server, 1);
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER,
                       &server, vtsn->stat_in_bytes,
                       &server, vtsn->stat_out_bytes,
                       &server, vtsn->stat_1xx_counter,
@@ -85,28 +88,29 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server_node(
 
         /* histogram:bucket */
         for (i = 0; i < n; i++) {
-            buf = ngx_sprintf(buf,
+            buf->last = ngx_slprintf(buf->last, buf->end,
                       NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_HISTOGRAM_BUCKET,
                       &server, (double) b->buckets[i].msec / 1000, b->buckets[i].counter);
         }
 
-        buf = ngx_sprintf(buf,
+        buf->last = ngx_slprintf(buf->last, buf->end,
                   NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_HISTOGRAM_BUCKET_E,
                   &server, vtsn->stat_request_counter);
 
         /* histogram:sum */
-        buf = ngx_sprintf(buf,
+        buf->last = ngx_slprintf(buf->last, buf->end,
                   NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_HISTOGRAM_SUM,
                   &server, (double) vtsn->stat_request_time_counter / 1000);
 
         /* histogram:count */
-        buf = ngx_sprintf(buf,
+        buf->last = ngx_slprintf(buf->last, buf->end,
                   NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_HISTOGRAM_COUNT,
                   &server, vtsn->stat_request_counter);
     }
 
 #if (NGX_HTTP_CACHE)
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_CACHE,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_CACHE,
                       &server, vtsn->stat_cache_miss_counter,
                       &server, vtsn->stat_cache_bypass_counter,
                       &server, vtsn->stat_cache_expired_counter,
@@ -117,13 +121,13 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server_node(
                       &server, vtsn->stat_cache_scarce_counter);
 #endif
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *r,
-    u_char *buf, ngx_rbtree_node_t *node)
+    ngx_buf_t *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                                  key, escaped_key;
     ngx_http_vhost_traffic_status_ctx_t       *ctx;
@@ -142,7 +146,7 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *
             key.len = vtsn->len;
 
             ngx_hex_escape_invalid_utf8_char(r->pool, &escaped_key, key.data, key.len);
-            buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, vtsn);
+            ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, vtsn);
 
             /* calculates the sum */
             vtscf->stats.stat_request_counter += vtsn->stat_request_counter;
@@ -178,18 +182,18 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *
 #endif
         }
 
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node->left);
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node->right);
+        ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node->left);
+        ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node->right);
     }
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(
     ngx_http_request_t *r,
-    u_char *buf, ngx_str_t *key,
+    ngx_buf_t *buf, ngx_str_t *key,
     ngx_http_vhost_traffic_status_node_t *vtsn)
 {
     ngx_str_t                                               filter, filter_name;
@@ -204,7 +208,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(
     (void) ngx_http_vhost_traffic_status_node_position_key(&filter, 1);
     (void) ngx_http_vhost_traffic_status_node_position_key(&filter_name, 2);
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER,
                       &filter, &filter_name, vtsn->stat_in_bytes,
                       &filter, &filter_name, vtsn->stat_out_bytes,
                       &filter, &filter_name, vtsn->stat_1xx_counter,
@@ -228,29 +233,30 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(
 
         /* histogram:bucket */
         for (i = 0; i < n; i++) {
-            buf = ngx_sprintf(buf,
+            buf->last = ngx_slprintf(buf->last, buf->end,
                       NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_HISTOGRAM_BUCKET,
                       &filter, &filter_name, (double) b->buckets[i].msec / 1000,
                       b->buckets[i].counter);
         }
 
-        buf = ngx_sprintf(buf,
+        buf->last = ngx_slprintf(buf->last, buf->end,
                   NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_HISTOGRAM_BUCKET_E,
                   &filter, &filter_name, vtsn->stat_request_counter);
 
         /* histogram:sum */
-        buf = ngx_sprintf(buf,
+        buf->last = ngx_slprintf(buf->last, buf->end,
                   NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_HISTOGRAM_SUM,
                   &filter, &filter_name, (double) vtsn->stat_request_time_counter / 1000);
 
         /* histogram:count */
-        buf = ngx_sprintf(buf,
+        buf->last = ngx_slprintf(buf->last, buf->end,
                   NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_HISTOGRAM_COUNT,
                   &filter, &filter_name, vtsn->stat_request_counter);
     }
 
 #if (NGX_HTTP_CACHE)
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_CACHE,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_CACHE,
                       &filter, &filter_name, vtsn->stat_cache_miss_counter,
                       &filter, &filter_name, vtsn->stat_cache_bypass_counter,
                       &filter, &filter_name, vtsn->stat_cache_expired_counter,
@@ -261,13 +267,13 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(
                       &filter, &filter_name, vtsn->stat_cache_scarce_counter);
 #endif
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_filter(ngx_http_request_t *r,
-    u_char *buf, ngx_rbtree_node_t *node)
+    ngx_buf_t *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                              key, escaped_key;
     ngx_http_vhost_traffic_status_ctx_t   *ctx;
@@ -283,21 +289,21 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter(ngx_http_request_t *
             key.len = vtsn->len;
 
             ngx_hex_escape_invalid_utf8_char(r->pool, &escaped_key, key.data, key.len);
-            buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(r, buf, &escaped_key, vtsn);
+            ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(r, buf, &escaped_key, vtsn);
         }
 
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node->left);
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node->right);
+        ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node->left);
+        ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node->right);
     }
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(
     ngx_http_request_t *r,
-    u_char *buf, ngx_str_t *key,
+    ngx_buf_t *buf, ngx_str_t *key,
     ngx_http_vhost_traffic_status_node_t *vtsn)
 {
     ngx_str_t                                               target, upstream, upstream_server;
@@ -319,7 +325,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(
         (void) ngx_http_vhost_traffic_status_node_position_key(&upstream_server, 1);
     }
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM,
                       &upstream, &upstream_server, vtsn->stat_in_bytes,
                       &upstream, &upstream_server, vtsn->stat_out_bytes,
                       &upstream, &upstream_server, vtsn->stat_1xx_counter,
@@ -359,36 +366,36 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(
         if (n > 0) {
             /* histogram:bucket */
             for (i = 0; i < n; i++) {
-                buf = ngx_sprintf(buf,
+                buf->last = ngx_slprintf(buf->last, buf->end,
                         NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM_HISTOGRAM_BUCKET,
                         &target, &upstream, &upstream_server, (double) b->buckets[i].msec / 1000,
                         b->buckets[i].counter);
             }
 
-            buf = ngx_sprintf(buf,
+            buf->last = ngx_slprintf(buf->last, buf->end,
                     NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM_HISTOGRAM_BUCKET_E,
                     &target, &upstream, &upstream_server, vtsn->stat_request_counter);
 
             /* histogram:sum */
-            buf = ngx_sprintf(buf,
+            buf->last = ngx_slprintf(buf->last, buf->end,
                     NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM_HISTOGRAM_SUM,
                     &target, &upstream, &upstream_server, (double) time_counter / 1000);
 
             /* histogram:count */
-            buf = ngx_sprintf(buf,
+            buf->last = ngx_slprintf(buf->last, buf->end,
                     NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM_HISTOGRAM_COUNT,
                     &target, &upstream, &upstream_server, vtsn->stat_request_counter);
         }
 
     }
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_upstream(ngx_http_request_t *r,
-    u_char *buf, ngx_rbtree_node_t *node)
+    ngx_buf_t *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                              key, escaped_key;
     ngx_http_vhost_traffic_status_ctx_t   *ctx;
@@ -406,23 +413,23 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream(ngx_http_request_t
             key.len = vtsn->len;
 
             ngx_hex_escape_invalid_utf8_char(r->pool, &escaped_key, key.data, key.len);
-            buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(r, buf, &escaped_key, vtsn);
+            ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(r, buf, &escaped_key, vtsn);
         }
 
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node->left);
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node->right);
+        ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node->left);
+        ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node->right);
     }
 
-    return buf;
+    return NGX_OK;
 }
 
 
 #if (NGX_HTTP_CACHE)
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(
     ngx_http_request_t *r,
-    u_char *buf, ngx_str_t *key,
+    ngx_buf_t *buf, ngx_str_t *key,
     ngx_http_vhost_traffic_status_node_t *vtsn)
 {
     ngx_str_t  cache;
@@ -431,7 +438,8 @@ ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(
 
     (void) ngx_http_vhost_traffic_status_node_position_key(&cache, 1);
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_CACHE,
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_CACHE,
                       &cache, vtsn->stat_cache_max_size,
                       &cache, vtsn->stat_cache_used_size,
                       &cache, vtsn->stat_in_bytes,
@@ -445,13 +453,13 @@ ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(
                       &cache, vtsn->stat_cache_hit_counter,
                       &cache, vtsn->stat_cache_scarce_counter);
 
-    return buf;
+    return NGX_OK;
 }
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set_cache(ngx_http_request_t *r,
-    u_char *buf, ngx_rbtree_node_t *node)
+    ngx_buf_t *buf, ngx_rbtree_node_t *node)
 {
     ngx_str_t                              key, escaped_key;
     ngx_http_vhost_traffic_status_ctx_t   *ctx;
@@ -467,22 +475,22 @@ ngx_http_vhost_traffic_status_display_prometheus_set_cache(ngx_http_request_t *r
             key.len = vtsn->len;
 
             ngx_hex_escape_invalid_utf8_char(r->pool, &escaped_key, key.data, key.len);
-            buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(r, buf, &escaped_key, vtsn);
+            ngx_http_vhost_traffic_status_display_prometheus_set_cache_node(r, buf, &escaped_key, vtsn);
         }
 
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node->left);
-        buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node->right);
+        ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node->left);
+        ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node->right);
     }
 
-    return buf;
+    return NGX_OK;
 }
 
 #endif
 
 
-u_char *
+ngx_int_t
 ngx_http_vhost_traffic_status_display_prometheus_set(ngx_http_request_t *r,
-    u_char *buf)
+    ngx_buf_t *buf)
 {
     ngx_str_t                                 escaped_key;
     u_char                                    *o, *s;
@@ -501,63 +509,69 @@ ngx_http_vhost_traffic_status_display_prometheus_set(ngx_http_request_t *r,
     ngx_http_vhost_traffic_status_node_time_queue_init(&vtscf->stats.stat_request_times);
 
     /* main & connections */
-    buf = ngx_http_vhost_traffic_status_display_prometheus_set_main(r, buf);
+    ngx_http_vhost_traffic_status_display_prometheus_set_main(r, buf);
 
     /* serverZones */
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_S);
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_S);
 #if (NGX_HTTP_CACHE)
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_CACHE_S);
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_CACHE_S);
 #endif
-    buf = ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node);
+    ngx_http_vhost_traffic_status_display_prometheus_set_server(r, buf, node);
 
     ngx_hex_escape_invalid_utf8_char(r->pool, &escaped_key, vtscf->sum_key.data, vtscf->sum_key.len);
-    buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, &vtscf->stats);
-    
-    /* filterZones */
-    o = buf;
+    ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, &vtscf->stats);
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_S);
+    /* filterZones */
+    o = buf->last;
+
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_S);
 #if (NGX_HTTP_CACHE)
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_CACHE_S);
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_FILTER_CACHE_S);
 #endif
 
-    s = buf;
+    s = buf->last;
 
-    buf = ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node);
+    ngx_http_vhost_traffic_status_display_prometheus_set_filter(r, buf, node);
 
-    if (s == buf) {
-        buf = o;
+    if (s == buf->last) {
+        buf->last = o;
     }
 
     /* upstreamZones */
-    o = buf;
+    o = buf->last;
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM_S);
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_UPSTREAM_S);
 
-    s = buf;
+    s = buf->last;
 
-    buf = ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node);
+    ngx_http_vhost_traffic_status_display_prometheus_set_upstream(r, buf, node);
 
-    if (s == buf) {
-        buf = o;
+    if (s == buf->last) {
+        buf->last = o;
     }
 
 #if (NGX_HTTP_CACHE)
     /* cacheZones */
-    o = buf;
+    o = buf->last;
 
-    buf = ngx_sprintf(buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_CACHE_S);
+    buf->last = ngx_slprintf(buf->last, buf->end,
+                      NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_CACHE_S);
 
-    s = buf;
+    s = buf->last;
 
-    buf = ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node);
+    ngx_http_vhost_traffic_status_display_prometheus_set_cache(r, buf, node);
 
-    if (s == buf) {
-        buf = o;
+    if (s == buf->last) {
+        buf->last = o;
     }
 #endif
 
-    return buf;
+    return NGX_OK;
 }
 
 /* vi:set ft=c ts=4 sw=4 et fdm=marker: */

@@ -220,7 +220,7 @@ ngx_http_vhost_traffic_status_display_handler_control(ngx_http_request_t *r)
         return NGX_HTTP_INTERNAL_SERVER_ERROR;
     }
 
-    control->buf = &b->last;
+    control->buf = b;
 
     shpool = (ngx_slab_pool_t *) vtscf->shm_zone->shm.addr;
 
@@ -241,7 +241,7 @@ ngx_http_vhost_traffic_status_display_handler_control(ngx_http_request_t *r)
         break;
 
     default:
-        *control->buf = ngx_sprintf(*control->buf,
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                     NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_CONTROL,
                                     ngx_http_vhost_traffic_status_boolean_to_string(0),
                                     control->arg_cmd, control->arg_group,
@@ -252,7 +252,7 @@ ngx_http_vhost_traffic_status_display_handler_control(ngx_http_request_t *r)
     ngx_shmtx_unlock(&shpool->mutex);
 
     if (b->last == b->pos) {
-        b->last = ngx_sprintf(b->last, "{}");
+        b->last = ngx_slprintf(b->last, b->end, "{}");
     }
 
     r->headers_out.status = NGX_HTTP_OK;
@@ -400,35 +400,35 @@ ngx_http_vhost_traffic_status_display_handler_default(ngx_http_request_t *r)
     if (format == NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSON) {
         shpool = (ngx_slab_pool_t *) vtscf->shm_zone->shm.addr;
         ngx_shmtx_lock(&shpool->mutex);
-        b->last = ngx_http_vhost_traffic_status_display_set(r, b->last);
+        ngx_http_vhost_traffic_status_display_set(r, b);
         ngx_shmtx_unlock(&shpool->mutex);
 
         if (b->last == b->pos) {
-            b->last = ngx_sprintf(b->last, "{}");
+            b->last = ngx_slprintf(b->last, b->end, "{}");
         }
 
     } else if (format == NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_JSONP) {
         shpool = (ngx_slab_pool_t *) vtscf->shm_zone->shm.addr;
         ngx_shmtx_lock(&shpool->mutex);
-        b->last = ngx_sprintf(b->last, "%V", &vtscf->jsonp);
-        b->last = ngx_sprintf(b->last, "(");
-        b->last = ngx_http_vhost_traffic_status_display_set(r, b->last);
-        b->last = ngx_sprintf(b->last, ")");
+        b->last = ngx_slprintf(b->last, b->end, "%V", &vtscf->jsonp);
+        b->last = ngx_slprintf(b->last, b->end, "(");
+        ngx_http_vhost_traffic_status_display_set(r, b);
+        b->last = ngx_slprintf(b->last, b->end, ")");
         ngx_shmtx_unlock(&shpool->mutex);
 
     } else if (format == NGX_HTTP_VHOST_TRAFFIC_STATUS_FORMAT_PROMETHEUS) {
         shpool = (ngx_slab_pool_t *) vtscf->shm_zone->shm.addr;
         ngx_shmtx_lock(&shpool->mutex);
-        b->last = ngx_http_vhost_traffic_status_display_prometheus_set(r, b->last);
+        ngx_http_vhost_traffic_status_display_prometheus_set(r, b);
         ngx_shmtx_unlock(&shpool->mutex);
 
         if (b->last == b->pos) {
-            b->last = ngx_sprintf(b->last, "#");
+            b->last = ngx_slprintf(b->last, b->end, "#");
         }
 
     }
     else {
-        b->last = ngx_sprintf(b->last, NGX_HTTP_VHOST_TRAFFIC_STATUS_HTML_DATA, &uri, &uri);
+        b->last = ngx_slprintf(b->last, b->end, NGX_HTTP_VHOST_TRAFFIC_STATUS_HTML_DATA, &uri, &uri);
     }
 
     r->headers_out.status = NGX_HTTP_OK;
@@ -600,7 +600,7 @@ ngx_http_vhost_traffic_status_display_get_time_queue_msecs(
                offsetof(ngx_http_vhost_traffic_status_node_time_t, msec));
 }
 
-    
+
 u_char *
 ngx_http_vhost_traffic_status_display_get_histogram_bucket(
     ngx_http_request_t *r,

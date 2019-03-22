@@ -150,7 +150,7 @@ static void
 ngx_http_vhost_traffic_status_node_status_all(
     ngx_http_vhost_traffic_status_control_t *control)
 {
-    *control->buf = ngx_http_vhost_traffic_status_display_set(control->r, *control->buf);
+    ngx_http_vhost_traffic_status_display_set(control->r, control->buf);
 }
 
 
@@ -167,73 +167,71 @@ ngx_http_vhost_traffic_status_node_status_group(
 
     node = ctx->rbtree->root;
 
-    *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_S);
+    control->buf->last = ngx_slprintf(control->buf->last, control->buf->end, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_S);
 
-    o = s = *control->buf;
+    o = s = control->buf->last;
 
     switch(control->group) {
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_NO:
-        *control->buf = ngx_sprintf(*control->buf,
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                     NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_SERVER_S);
-        s = *control->buf;
-        *control->buf = ngx_http_vhost_traffic_status_display_set_server(
-                            control->r, *control->buf, node);
+        s = control->buf->last;
+        ngx_http_vhost_traffic_status_display_set_server(control->r, control->buf, node);
         break;
 
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UA:
         ngx_str_set(&key, "::nogroups");
-        *control->buf = ngx_sprintf(*control->buf,
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                     NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_ARRAY_S, &key);
-        s = *control->buf;
-        *control->buf = ngx_http_vhost_traffic_status_display_set_upstream_alone(
-                            control->r, *control->buf, node);
+        s = control->buf->last;
+        ngx_http_vhost_traffic_status_display_set_upstream_alone(
+                            control->r, control->buf, node);
         break;
 
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UG:
-        *control->buf = ngx_sprintf(*control->buf,
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                     NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_UPSTREAM_S);
-        s = *control->buf;
-        *control->buf = ngx_http_vhost_traffic_status_display_set_upstream_group(
-                            control->r, *control->buf);
+        s = control->buf->last;
+        ngx_http_vhost_traffic_status_display_set_upstream_group(control->r, control->buf);
         break;
 
 #if (NGX_HTTP_CACHE)
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_CC:
-        *control->buf = ngx_sprintf(*control->buf,
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                     NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_CACHE_S);
-        s = *control->buf;
-        *control->buf = ngx_http_vhost_traffic_status_display_set_cache(
-                            control->r, *control->buf, node);
+        s = control->buf->last;
+        ngx_http_vhost_traffic_status_display_set_cache(control->r, control->buf, node);
         break;
 #endif
 
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_FG:
-        *control->buf = ngx_sprintf(*control->buf,
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                     NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_FILTER_S);
-        s = *control->buf;
-        *control->buf = ngx_http_vhost_traffic_status_display_set_filter(
-                            control->r, *control->buf, node);
+        s = control->buf->last;
+        ngx_http_vhost_traffic_status_display_set_filter(control->r, control->buf, node);
         break;
     }
 
-    if (s == *control->buf) {
-        *control->buf = o;
+    if (s == control->buf->last) {
+        control->buf->last = o;
 
     } else {
-        (*control->buf)--;
+        control->buf->last--;
 
         if (control->group == NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UA) {
-            *control->buf = ngx_sprintf(*control->buf,
+            control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                         NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_ARRAY_E);
 
         } else {
-            *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
+            control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
+                                        NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
         }
 
         control->count++;
     }
 
-    *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
+    control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
+                                        NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
 }
 
 
@@ -256,11 +254,12 @@ ngx_http_vhost_traffic_status_node_status_zone(
         && control->zone->len == 6
         && ngx_strncasecmp(control->zone->data, (u_char *) "::main", 6) == 0)
     {
-        *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_S);
-        *control->buf = ngx_http_vhost_traffic_status_display_set_main(control->r,
-                            *control->buf);
-        (*control->buf)--;
-         *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
+                                        NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_S);
+        ngx_http_vhost_traffic_status_display_set_main(control->r, control->buf);
+        control->buf->last--;
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
+                                        NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
 
         control->count++;
 
@@ -287,13 +286,11 @@ ngx_http_vhost_traffic_status_node_status_zone(
     if (control->group != NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UG
         && control->group != NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UA)
     {
-        *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_S);
-
-        o = *control->buf;
-
-    } else {
-        o = *control->buf;
+        control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
+                                NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_S);
     }
+
+    o = control->buf->last;
 
     dst.data = vtsn->data;
     dst.len = vtsn->len;
@@ -301,8 +298,8 @@ ngx_http_vhost_traffic_status_node_status_zone(
     switch (control->group) {
 
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_NO:
-        *control->buf = ngx_http_vhost_traffic_status_display_set_server_node(control->r,
-                            *control->buf, &key, vtsn);
+        ngx_http_vhost_traffic_status_display_set_server_node(control->r,
+                            control->buf, &key, vtsn);
         break;
 
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UA:
@@ -310,37 +307,38 @@ ngx_http_vhost_traffic_status_node_status_zone(
         ngx_http_vhost_traffic_status_node_upstream_lookup(control, &us);
         if (control->count) {
 #if nginx_version > 1007001
-            *control->buf = ngx_http_vhost_traffic_status_display_set_upstream_node(control->r,
-                                *control->buf, &us, vtsn);
+            ngx_http_vhost_traffic_status_display_set_upstream_node(control->r,
+                                control->buf, &us, vtsn);
 #else
             (void) ngx_http_vhost_traffic_status_node_position_key(&dst, 1);
-            *control->buf = ngx_http_vhost_traffic_status_display_set_upstream_node(control->r,
-                                *control->buf, &us, vtsn, &dst);
+            ngx_http_vhost_traffic_status_display_set_upstream_node(control->r,
+                                control->buf, &us, vtsn, &dst);
 #endif
         }
         break;
 
 #if (NGX_HTTP_CACHE)
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_CC:
-        *control->buf = ngx_http_vhost_traffic_status_display_set_cache_node(control->r,
-                            *control->buf, vtsn);
+        ngx_http_vhost_traffic_status_display_set_cache_node(control->r,
+                            control->buf, vtsn);
         break;
 #endif
 
     case NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_FG:
         (void) ngx_http_vhost_traffic_status_node_position_key(&dst, 2);
-        *control->buf = ngx_http_vhost_traffic_status_display_set_server_node(control->r,
-                            *control->buf, &dst, vtsn);
+        ngx_http_vhost_traffic_status_display_set_server_node(control->r,
+                            control->buf, &dst, vtsn);
         break;
     }
 
-    if (o != *control->buf) {
-        (*control->buf)--;
+    if (o != control->buf->last) {
+        control->buf->last--;
 
         if (control->group != NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UG
                 && control->group != NGX_HTTP_VHOST_TRAFFIC_STATUS_UPSTREAM_UA)
         {
-            *control->buf = ngx_sprintf(*control->buf, NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
+            control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
+                                    NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_E);
         }
 
         control->count++;
@@ -555,7 +553,7 @@ ngx_http_vhost_traffic_status_node_delete(
         break;
     }
 
-    *control->buf = ngx_sprintf(*control->buf,
+    control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                 NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_CONTROL,
                                 ngx_http_vhost_traffic_status_boolean_to_string(1),
                                 control->arg_cmd, control->arg_group,
@@ -665,7 +663,7 @@ ngx_http_vhost_traffic_status_node_reset(
         break;
     }
 
-    *control->buf = ngx_sprintf(*control->buf,
+    control->buf->last = ngx_slprintf(control->buf->last, control->buf->end,
                                 NGX_HTTP_VHOST_TRAFFIC_STATUS_JSON_FMT_CONTROL,
                                 ngx_http_vhost_traffic_status_boolean_to_string(1),
                                 control->arg_cmd, control->arg_group,

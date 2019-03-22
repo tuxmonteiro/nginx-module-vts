@@ -43,7 +43,7 @@ ngx_http_vhost_traffic_status_node_position_key(ngx_str_t *buf, size_t pos)
     u_char  *p, *s;
 
     n = buf->len + 1;
-    c = len = 0;
+    c = len = 0; 
     p = s = buf->data;
 
     while (--n) {
