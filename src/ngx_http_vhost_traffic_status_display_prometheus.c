@@ -512,7 +512,7 @@ ngx_http_vhost_traffic_status_display_prometheus_set(ngx_http_request_t *r,
 
     ngx_http_vhost_traffic_status_escape_prometheus(r->pool, &escaped_key, vtscf->sum_key.data, vtscf->sum_key.len);
     buf = ngx_http_vhost_traffic_status_display_prometheus_set_server_node(r, buf, &escaped_key, &vtscf->stats);
-    
+
     /* filterZones */
     o = buf;
 
