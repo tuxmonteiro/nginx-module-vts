@@ -70,6 +70,69 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server_node(
                       &server, vtsn->stat_3xx_counter,
                       &server, vtsn->stat_4xx_counter,
                       &server, vtsn->stat_5xx_counter,
+                      &server, vtsn->stat_100_counter,
+                      &server, vtsn->stat_101_counter,
+                      &server, vtsn->stat_102_counter,
+                      &server, vtsn->stat_200_counter,
+                      &server, vtsn->stat_201_counter,
+                      &server, vtsn->stat_202_counter,
+                      &server, vtsn->stat_203_counter,
+                      &server, vtsn->stat_204_counter,
+                      &server, vtsn->stat_205_counter,
+                      &server, vtsn->stat_206_counter,
+                      &server, vtsn->stat_207_counter,
+                      &server, vtsn->stat_208_counter,
+                      &server, vtsn->stat_226_counter,
+                      &server, vtsn->stat_300_counter,
+                      &server, vtsn->stat_301_counter,
+                      &server, vtsn->stat_302_counter,
+                      &server, vtsn->stat_303_counter,
+                      &server, vtsn->stat_304_counter,
+                      &server, vtsn->stat_305_counter,
+                      &server, vtsn->stat_307_counter,
+                      &server, vtsn->stat_308_counter,
+                      &server, vtsn->stat_400_counter,
+                      &server, vtsn->stat_401_counter,
+                      &server, vtsn->stat_402_counter,
+                      &server, vtsn->stat_403_counter,
+                      &server, vtsn->stat_404_counter,
+                      &server, vtsn->stat_405_counter,
+                      &server, vtsn->stat_406_counter,
+                      &server, vtsn->stat_407_counter,
+                      &server, vtsn->stat_408_counter,
+                      &server, vtsn->stat_409_counter,
+                      &server, vtsn->stat_410_counter,
+                      &server, vtsn->stat_411_counter,
+                      &server, vtsn->stat_412_counter,
+                      &server, vtsn->stat_413_counter,
+                      &server, vtsn->stat_414_counter,
+                      &server, vtsn->stat_415_counter,
+                      &server, vtsn->stat_416_counter,
+                      &server, vtsn->stat_417_counter,
+                      &server, vtsn->stat_418_counter,
+                      &server, vtsn->stat_421_counter,
+                      &server, vtsn->stat_422_counter,
+                      &server, vtsn->stat_423_counter,
+                      &server, vtsn->stat_424_counter,
+                      &server, vtsn->stat_426_counter,
+                      &server, vtsn->stat_428_counter,
+                      &server, vtsn->stat_429_counter,
+                      &server, vtsn->stat_431_counter,
+                      &server, vtsn->stat_444_counter,
+                      &server, vtsn->stat_451_counter,
+                      &server, vtsn->stat_499_counter,
+                      &server, vtsn->stat_500_counter,
+                      &server, vtsn->stat_501_counter,
+                      &server, vtsn->stat_502_counter,
+                      &server, vtsn->stat_503_counter,
+                      &server, vtsn->stat_504_counter,
+                      &server, vtsn->stat_505_counter,
+                      &server, vtsn->stat_506_counter,
+                      &server, vtsn->stat_507_counter,
+                      &server, vtsn->stat_508_counter,
+                      &server, vtsn->stat_510_counter,
+                      &server, vtsn->stat_511_counter,
+                      &server, vtsn->stat_599_counter,
                       &server, (double) vtsn->stat_request_time_counter / 1000,
                       &server, (double) ngx_http_vhost_traffic_status_node_time_queue_average(
                                    &vtsn->stat_request_times, vtscf->average_method,
@@ -152,6 +215,69 @@ ngx_http_vhost_traffic_status_display_prometheus_set_server(ngx_http_request_t *
             vtscf->stats.stat_3xx_counter += vtsn->stat_3xx_counter;
             vtscf->stats.stat_4xx_counter += vtsn->stat_4xx_counter;
             vtscf->stats.stat_5xx_counter += vtsn->stat_5xx_counter;
+            vtscf->stats.stat_100_counter += vtsn->stat_100_counter;
+            vtscf->stats.stat_101_counter += vtsn->stat_101_counter;
+            vtscf->stats.stat_102_counter += vtsn->stat_102_counter;
+            vtscf->stats.stat_200_counter += vtsn->stat_200_counter;
+            vtscf->stats.stat_201_counter += vtsn->stat_201_counter;
+            vtscf->stats.stat_202_counter += vtsn->stat_202_counter;
+            vtscf->stats.stat_203_counter += vtsn->stat_203_counter;
+            vtscf->stats.stat_204_counter += vtsn->stat_204_counter;
+            vtscf->stats.stat_205_counter += vtsn->stat_205_counter;
+            vtscf->stats.stat_206_counter += vtsn->stat_206_counter;
+            vtscf->stats.stat_207_counter += vtsn->stat_207_counter;
+            vtscf->stats.stat_208_counter += vtsn->stat_208_counter;
+            vtscf->stats.stat_226_counter += vtsn->stat_226_counter;
+            vtscf->stats.stat_300_counter += vtsn->stat_300_counter;
+            vtscf->stats.stat_301_counter += vtsn->stat_301_counter;
+            vtscf->stats.stat_302_counter += vtsn->stat_302_counter;
+            vtscf->stats.stat_303_counter += vtsn->stat_303_counter;
+            vtscf->stats.stat_304_counter += vtsn->stat_304_counter;
+            vtscf->stats.stat_305_counter += vtsn->stat_305_counter;
+            vtscf->stats.stat_307_counter += vtsn->stat_307_counter;
+            vtscf->stats.stat_308_counter += vtsn->stat_308_counter;
+            vtscf->stats.stat_400_counter += vtsn->stat_400_counter;
+            vtscf->stats.stat_401_counter += vtsn->stat_401_counter;
+            vtscf->stats.stat_402_counter += vtsn->stat_402_counter;
+            vtscf->stats.stat_403_counter += vtsn->stat_403_counter;
+            vtscf->stats.stat_404_counter += vtsn->stat_404_counter;
+            vtscf->stats.stat_405_counter += vtsn->stat_405_counter;
+            vtscf->stats.stat_406_counter += vtsn->stat_406_counter;
+            vtscf->stats.stat_407_counter += vtsn->stat_407_counter;
+            vtscf->stats.stat_408_counter += vtsn->stat_408_counter;
+            vtscf->stats.stat_409_counter += vtsn->stat_409_counter;
+            vtscf->stats.stat_410_counter += vtsn->stat_410_counter;
+            vtscf->stats.stat_411_counter += vtsn->stat_411_counter;
+            vtscf->stats.stat_412_counter += vtsn->stat_412_counter;
+            vtscf->stats.stat_413_counter += vtsn->stat_413_counter;
+            vtscf->stats.stat_414_counter += vtsn->stat_414_counter;
+            vtscf->stats.stat_415_counter += vtsn->stat_415_counter;
+            vtscf->stats.stat_416_counter += vtsn->stat_416_counter;
+            vtscf->stats.stat_417_counter += vtsn->stat_417_counter;
+            vtscf->stats.stat_418_counter += vtsn->stat_418_counter;
+            vtscf->stats.stat_421_counter += vtsn->stat_421_counter;
+            vtscf->stats.stat_422_counter += vtsn->stat_422_counter;
+            vtscf->stats.stat_423_counter += vtsn->stat_423_counter;
+            vtscf->stats.stat_424_counter += vtsn->stat_424_counter;
+            vtscf->stats.stat_426_counter += vtsn->stat_426_counter;
+            vtscf->stats.stat_428_counter += vtsn->stat_428_counter;
+            vtscf->stats.stat_429_counter += vtsn->stat_429_counter;
+            vtscf->stats.stat_431_counter += vtsn->stat_431_counter;
+            vtscf->stats.stat_444_counter += vtsn->stat_444_counter;
+            vtscf->stats.stat_451_counter += vtsn->stat_451_counter;
+            vtscf->stats.stat_499_counter += vtsn->stat_499_counter;
+            vtscf->stats.stat_500_counter += vtsn->stat_500_counter;
+            vtscf->stats.stat_501_counter += vtsn->stat_501_counter;
+            vtscf->stats.stat_502_counter += vtsn->stat_502_counter;
+            vtscf->stats.stat_503_counter += vtsn->stat_503_counter;
+            vtscf->stats.stat_504_counter += vtsn->stat_504_counter;
+            vtscf->stats.stat_505_counter += vtsn->stat_505_counter;
+            vtscf->stats.stat_506_counter += vtsn->stat_506_counter;
+            vtscf->stats.stat_507_counter += vtsn->stat_507_counter;
+            vtscf->stats.stat_508_counter += vtsn->stat_508_counter;
+            vtscf->stats.stat_510_counter += vtsn->stat_510_counter;
+            vtscf->stats.stat_511_counter += vtsn->stat_511_counter;
+            vtscf->stats.stat_599_counter += vtsn->stat_599_counter;
             vtscf->stats.stat_request_time_counter += vtsn->stat_request_time_counter;
             ngx_http_vhost_traffic_status_node_time_queue_merge(
                 &vtscf->stats.stat_request_times,
@@ -211,6 +337,69 @@ ngx_http_vhost_traffic_status_display_prometheus_set_filter_node(
                       &filter, &filter_name, vtsn->stat_3xx_counter,
                       &filter, &filter_name, vtsn->stat_4xx_counter,
                       &filter, &filter_name, vtsn->stat_5xx_counter,
+                      &filter, &filter_name, vtsn->stat_100_counter,
+                      &filter, &filter_name, vtsn->stat_101_counter,
+                      &filter, &filter_name, vtsn->stat_102_counter,
+                      &filter, &filter_name, vtsn->stat_200_counter,
+                      &filter, &filter_name, vtsn->stat_201_counter,
+                      &filter, &filter_name, vtsn->stat_202_counter,
+                      &filter, &filter_name, vtsn->stat_203_counter,
+                      &filter, &filter_name, vtsn->stat_204_counter,
+                      &filter, &filter_name, vtsn->stat_205_counter,
+                      &filter, &filter_name, vtsn->stat_206_counter,
+                      &filter, &filter_name, vtsn->stat_207_counter,
+                      &filter, &filter_name, vtsn->stat_208_counter,
+                      &filter, &filter_name, vtsn->stat_226_counter,
+                      &filter, &filter_name, vtsn->stat_300_counter,
+                      &filter, &filter_name, vtsn->stat_301_counter,
+                      &filter, &filter_name, vtsn->stat_302_counter,
+                      &filter, &filter_name, vtsn->stat_303_counter,
+                      &filter, &filter_name, vtsn->stat_304_counter,
+                      &filter, &filter_name, vtsn->stat_305_counter,
+                      &filter, &filter_name, vtsn->stat_307_counter,
+                      &filter, &filter_name, vtsn->stat_308_counter,
+                      &filter, &filter_name, vtsn->stat_400_counter,
+                      &filter, &filter_name, vtsn->stat_401_counter,
+                      &filter, &filter_name, vtsn->stat_402_counter,
+                      &filter, &filter_name, vtsn->stat_403_counter,
+                      &filter, &filter_name, vtsn->stat_404_counter,
+                      &filter, &filter_name, vtsn->stat_405_counter,
+                      &filter, &filter_name, vtsn->stat_406_counter,
+                      &filter, &filter_name, vtsn->stat_407_counter,
+                      &filter, &filter_name, vtsn->stat_408_counter,
+                      &filter, &filter_name, vtsn->stat_409_counter,
+                      &filter, &filter_name, vtsn->stat_410_counter,
+                      &filter, &filter_name, vtsn->stat_411_counter,
+                      &filter, &filter_name, vtsn->stat_412_counter,
+                      &filter, &filter_name, vtsn->stat_413_counter,
+                      &filter, &filter_name, vtsn->stat_414_counter,
+                      &filter, &filter_name, vtsn->stat_415_counter,
+                      &filter, &filter_name, vtsn->stat_416_counter,
+                      &filter, &filter_name, vtsn->stat_417_counter,
+                      &filter, &filter_name, vtsn->stat_418_counter,
+                      &filter, &filter_name, vtsn->stat_421_counter,
+                      &filter, &filter_name, vtsn->stat_422_counter,
+                      &filter, &filter_name, vtsn->stat_423_counter,
+                      &filter, &filter_name, vtsn->stat_424_counter,
+                      &filter, &filter_name, vtsn->stat_426_counter,
+                      &filter, &filter_name, vtsn->stat_428_counter,
+                      &filter, &filter_name, vtsn->stat_429_counter,
+                      &filter, &filter_name, vtsn->stat_431_counter,
+                      &filter, &filter_name, vtsn->stat_444_counter,
+                      &filter, &filter_name, vtsn->stat_451_counter,
+                      &filter, &filter_name, vtsn->stat_499_counter,
+                      &filter, &filter_name, vtsn->stat_500_counter,
+                      &filter, &filter_name, vtsn->stat_501_counter,
+                      &filter, &filter_name, vtsn->stat_502_counter,
+                      &filter, &filter_name, vtsn->stat_503_counter,
+                      &filter, &filter_name, vtsn->stat_504_counter,
+                      &filter, &filter_name, vtsn->stat_505_counter,
+                      &filter, &filter_name, vtsn->stat_506_counter,
+                      &filter, &filter_name, vtsn->stat_507_counter,
+                      &filter, &filter_name, vtsn->stat_508_counter,
+                      &filter, &filter_name, vtsn->stat_510_counter,
+                      &filter, &filter_name, vtsn->stat_511_counter,
+                      &filter, &filter_name, vtsn->stat_599_counter,
                       &filter, &filter_name, (double) vtsn->stat_request_time_counter / 1000,
                       &filter, &filter_name,
                       (double) ngx_http_vhost_traffic_status_node_time_queue_average(
@@ -325,6 +514,69 @@ ngx_http_vhost_traffic_status_display_prometheus_set_upstream_node(
                       &upstream, &upstream_server, vtsn->stat_3xx_counter,
                       &upstream, &upstream_server, vtsn->stat_4xx_counter,
                       &upstream, &upstream_server, vtsn->stat_5xx_counter,
+                      &upstream, &upstream_server, vtsn->stat_100_counter,
+                      &upstream, &upstream_server, vtsn->stat_101_counter,
+                      &upstream, &upstream_server, vtsn->stat_102_counter,
+                      &upstream, &upstream_server, vtsn->stat_200_counter,
+                      &upstream, &upstream_server, vtsn->stat_201_counter,
+                      &upstream, &upstream_server, vtsn->stat_202_counter,
+                      &upstream, &upstream_server, vtsn->stat_203_counter,
+                      &upstream, &upstream_server, vtsn->stat_204_counter,
+                      &upstream, &upstream_server, vtsn->stat_205_counter,
+                      &upstream, &upstream_server, vtsn->stat_206_counter,
+                      &upstream, &upstream_server, vtsn->stat_207_counter,
+                      &upstream, &upstream_server, vtsn->stat_208_counter,
+                      &upstream, &upstream_server, vtsn->stat_226_counter,
+                      &upstream, &upstream_server, vtsn->stat_300_counter,
+                      &upstream, &upstream_server, vtsn->stat_301_counter,
+                      &upstream, &upstream_server, vtsn->stat_302_counter,
+                      &upstream, &upstream_server, vtsn->stat_303_counter,
+                      &upstream, &upstream_server, vtsn->stat_304_counter,
+                      &upstream, &upstream_server, vtsn->stat_305_counter,
+                      &upstream, &upstream_server, vtsn->stat_307_counter,
+                      &upstream, &upstream_server, vtsn->stat_308_counter,
+                      &upstream, &upstream_server, vtsn->stat_400_counter,
+                      &upstream, &upstream_server, vtsn->stat_401_counter,
+                      &upstream, &upstream_server, vtsn->stat_402_counter,
+                      &upstream, &upstream_server, vtsn->stat_403_counter,
+                      &upstream, &upstream_server, vtsn->stat_404_counter,
+                      &upstream, &upstream_server, vtsn->stat_405_counter,
+                      &upstream, &upstream_server, vtsn->stat_406_counter,
+                      &upstream, &upstream_server, vtsn->stat_407_counter,
+                      &upstream, &upstream_server, vtsn->stat_408_counter,
+                      &upstream, &upstream_server, vtsn->stat_409_counter,
+                      &upstream, &upstream_server, vtsn->stat_410_counter,
+                      &upstream, &upstream_server, vtsn->stat_411_counter,
+                      &upstream, &upstream_server, vtsn->stat_412_counter,
+                      &upstream, &upstream_server, vtsn->stat_413_counter,
+                      &upstream, &upstream_server, vtsn->stat_414_counter,
+                      &upstream, &upstream_server, vtsn->stat_415_counter,
+                      &upstream, &upstream_server, vtsn->stat_416_counter,
+                      &upstream, &upstream_server, vtsn->stat_417_counter,
+                      &upstream, &upstream_server, vtsn->stat_418_counter,
+                      &upstream, &upstream_server, vtsn->stat_421_counter,
+                      &upstream, &upstream_server, vtsn->stat_422_counter,
+                      &upstream, &upstream_server, vtsn->stat_423_counter,
+                      &upstream, &upstream_server, vtsn->stat_424_counter,
+                      &upstream, &upstream_server, vtsn->stat_426_counter,
+                      &upstream, &upstream_server, vtsn->stat_428_counter,
+                      &upstream, &upstream_server, vtsn->stat_429_counter,
+                      &upstream, &upstream_server, vtsn->stat_431_counter,
+                      &upstream, &upstream_server, vtsn->stat_444_counter,
+                      &upstream, &upstream_server, vtsn->stat_451_counter,
+                      &upstream, &upstream_server, vtsn->stat_499_counter,
+                      &upstream, &upstream_server, vtsn->stat_500_counter,
+                      &upstream, &upstream_server, vtsn->stat_501_counter,
+                      &upstream, &upstream_server, vtsn->stat_502_counter,
+                      &upstream, &upstream_server, vtsn->stat_503_counter,
+                      &upstream, &upstream_server, vtsn->stat_504_counter,
+                      &upstream, &upstream_server, vtsn->stat_505_counter,
+                      &upstream, &upstream_server, vtsn->stat_506_counter,
+                      &upstream, &upstream_server, vtsn->stat_507_counter,
+                      &upstream, &upstream_server, vtsn->stat_508_counter,
+                      &upstream, &upstream_server, vtsn->stat_510_counter,
+                      &upstream, &upstream_server, vtsn->stat_511_counter,
+                      &upstream, &upstream_server, vtsn->stat_599_counter,
                       &upstream, &upstream_server, (double) vtsn->stat_request_time_counter / 1000,
                       &upstream, &upstream_server,
                       (double) ngx_http_vhost_traffic_status_node_time_queue_average(

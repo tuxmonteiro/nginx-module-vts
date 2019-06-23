@@ -46,11 +46,74 @@
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_DEFAULT_DUMP_PERIOD  60
 
 #define ngx_http_vhost_traffic_status_add_rc(s, n) {                           \
-    if(s < 200) {n->stat_1xx_counter++;}                                       \
-    else if(s < 300) {n->stat_2xx_counter++;}                                  \
-    else if(s < 400) {n->stat_3xx_counter++;}                                  \
-    else if(s < 500) {n->stat_4xx_counter++;}                                  \
-    else {n->stat_5xx_counter++;}                                              \
+    if(s < 200) {n->stat_1xx_counter++;                                        \
+        if(s == 100) {n->stat_100_counter++;}                                  \
+        else if(s == 101) {n->stat_101_counter++;}                             \
+        else if(s == 102) {n->stat_102_counter++;}}                            \
+    else if(s < 300) {n->stat_2xx_counter++;                                   \
+        if(s == 200) {n->stat_200_counter++;}                                  \
+        else if(s == 201) {n->stat_201_counter++;}                             \
+        else if(s == 202) {n->stat_202_counter++;}                             \
+        else if(s == 203) {n->stat_203_counter++;}                             \
+        else if(s == 204) {n->stat_204_counter++;}                             \
+        else if(s == 205) {n->stat_205_counter++;}                             \
+        else if(s == 206) {n->stat_206_counter++;}                             \
+        else if(s == 207) {n->stat_207_counter++;}                             \
+        else if(s == 208) {n->stat_208_counter++;}                             \
+        else if(s == 226) {n->stat_226_counter++;}}                            \
+    else if(s < 400) {n->stat_3xx_counter++;                                   \
+        if(s == 300) {n->stat_300_counter++;}                                  \
+        else if(s == 301) {n->stat_301_counter++;}                             \
+        else if(s == 302) {n->stat_302_counter++;}                             \
+        else if(s == 303) {n->stat_303_counter++;}                             \
+        else if(s == 304) {n->stat_304_counter++;}                             \
+        else if(s == 305) {n->stat_305_counter++;}                             \
+        else if(s == 307) {n->stat_307_counter++;}                             \
+        else if(s == 308) {n->stat_308_counter++;}}                            \
+    else if(s < 500) {n->stat_4xx_counter++;                                   \
+        if(s == 400) {n->stat_400_counter++;}                                  \
+        else if(s == 401) {n->stat_401_counter++;}                             \
+        else if(s == 402) {n->stat_402_counter++;}                             \
+        else if(s == 403) {n->stat_403_counter++;}                             \
+        else if(s == 404) {n->stat_404_counter++;}                             \
+        else if(s == 405) {n->stat_405_counter++;}                             \
+        else if(s == 406) {n->stat_406_counter++;}                             \
+        else if(s == 407) {n->stat_407_counter++;}                             \
+        else if(s == 408) {n->stat_408_counter++;}                             \
+        else if(s == 409) {n->stat_409_counter++;}                             \
+        else if(s == 410) {n->stat_410_counter++;}                             \
+        else if(s == 411) {n->stat_411_counter++;}                             \
+        else if(s == 412) {n->stat_412_counter++;}                             \
+        else if(s == 413) {n->stat_413_counter++;}                             \
+        else if(s == 414) {n->stat_414_counter++;}                             \
+        else if(s == 415) {n->stat_415_counter++;}                             \
+        else if(s == 416) {n->stat_416_counter++;}                             \
+        else if(s == 417) {n->stat_417_counter++;}                             \
+        else if(s == 418) {n->stat_418_counter++;}                             \
+        else if(s == 421) {n->stat_421_counter++;}                             \
+        else if(s == 422) {n->stat_422_counter++;}                             \
+        else if(s == 423) {n->stat_423_counter++;}                             \
+        else if(s == 424) {n->stat_424_counter++;}                             \
+        else if(s == 426) {n->stat_426_counter++;}                             \
+        else if(s == 428) {n->stat_428_counter++;}                             \
+        else if(s == 429) {n->stat_429_counter++;}                             \
+        else if(s == 431) {n->stat_431_counter++;}                             \
+        else if(s == 444) {n->stat_444_counter++;}                             \
+        else if(s == 451) {n->stat_451_counter++;}                             \
+        else if(s == 499) {n->stat_499_counter++;}}                            \
+    else {n->stat_5xx_counter++;                                               \
+        if(s == 500) {n->stat_500_counter++;}                                  \
+        else if(s == 501) {n->stat_501_counter++;}                             \
+        else if(s == 502) {n->stat_502_counter++;}                             \
+        else if(s == 503) {n->stat_503_counter++;}                             \
+        else if(s == 504) {n->stat_504_counter++;}                             \
+        else if(s == 505) {n->stat_505_counter++;}                             \
+        else if(s == 506) {n->stat_506_counter++;}                             \
+        else if(s == 507) {n->stat_507_counter++;}                             \
+        else if(s == 508) {n->stat_508_counter++;}                             \
+        else if(s == 510) {n->stat_510_counter++;}                             \
+        else if(s == 511) {n->stat_511_counter++;}                             \
+        else if(s == 599) {n->stat_599_counter++;}}                            \
 }
 
 #if (NGX_HTTP_CACHE)
@@ -122,6 +185,195 @@
     if (o->stat_5xx_counter > c->stat_5xx_counter) {                           \
         c->stat_5xx_counter_oc++;                                              \
     }                                                                          \
+    if (o->stat_100_counter > c->stat_100_counter) {                           \
+        c->stat_100_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_101_counter > c->stat_101_counter) {                           \
+        c->stat_101_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_102_counter > c->stat_102_counter) {                           \
+        c->stat_102_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_200_counter > c->stat_200_counter) {                           \
+        c->stat_200_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_201_counter > c->stat_201_counter) {                           \
+        c->stat_201_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_202_counter > c->stat_202_counter) {                           \
+        c->stat_202_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_203_counter > c->stat_203_counter) {                           \
+        c->stat_203_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_204_counter > c->stat_204_counter) {                           \
+        c->stat_204_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_205_counter > c->stat_205_counter) {                           \
+        c->stat_205_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_206_counter > c->stat_206_counter) {                           \
+        c->stat_206_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_207_counter > c->stat_207_counter) {                           \
+        c->stat_207_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_208_counter > c->stat_208_counter) {                           \
+        c->stat_208_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_226_counter > c->stat_226_counter) {                           \
+        c->stat_226_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_300_counter > c->stat_300_counter) {                           \
+        c->stat_300_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_301_counter > c->stat_301_counter) {                           \
+        c->stat_301_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_302_counter > c->stat_302_counter) {                           \
+        c->stat_302_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_303_counter > c->stat_303_counter) {                           \
+        c->stat_303_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_304_counter > c->stat_304_counter) {                           \
+        c->stat_304_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_305_counter > c->stat_305_counter) {                           \
+        c->stat_305_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_307_counter > c->stat_307_counter) {                           \
+        c->stat_307_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_308_counter > c->stat_308_counter) {                           \
+        c->stat_308_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_400_counter > c->stat_400_counter) {                           \
+        c->stat_400_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_401_counter > c->stat_401_counter) {                           \
+        c->stat_401_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_402_counter > c->stat_402_counter) {                           \
+        c->stat_402_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_403_counter > c->stat_403_counter) {                           \
+        c->stat_403_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_404_counter > c->stat_404_counter) {                           \
+        c->stat_404_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_405_counter > c->stat_405_counter) {                           \
+        c->stat_405_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_406_counter > c->stat_406_counter) {                           \
+        c->stat_406_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_407_counter > c->stat_407_counter) {                           \
+        c->stat_407_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_408_counter > c->stat_408_counter) {                           \
+        c->stat_408_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_409_counter > c->stat_409_counter) {                           \
+        c->stat_409_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_410_counter > c->stat_410_counter) {                           \
+        c->stat_410_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_411_counter > c->stat_411_counter) {                           \
+        c->stat_411_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_412_counter > c->stat_412_counter) {                           \
+        c->stat_412_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_413_counter > c->stat_413_counter) {                           \
+        c->stat_413_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_414_counter > c->stat_414_counter) {                           \
+        c->stat_414_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_415_counter > c->stat_415_counter) {                           \
+        c->stat_415_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_416_counter > c->stat_416_counter) {                           \
+        c->stat_416_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_417_counter > c->stat_417_counter) {                           \
+        c->stat_417_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_418_counter > c->stat_418_counter) {                           \
+        c->stat_418_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_421_counter > c->stat_421_counter) {                           \
+        c->stat_421_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_422_counter > c->stat_422_counter) {                           \
+        c->stat_422_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_423_counter > c->stat_423_counter) {                           \
+        c->stat_423_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_424_counter > c->stat_424_counter) {                           \
+        c->stat_424_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_426_counter > c->stat_426_counter) {                           \
+        c->stat_426_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_428_counter > c->stat_428_counter) {                           \
+        c->stat_428_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_429_counter > c->stat_429_counter) {                           \
+        c->stat_429_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_431_counter > c->stat_431_counter) {                           \
+        c->stat_431_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_444_counter > c->stat_444_counter) {                           \
+        c->stat_444_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_451_counter > c->stat_451_counter) {                           \
+        c->stat_451_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_499_counter > c->stat_499_counter) {                           \
+        c->stat_499_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_500_counter > c->stat_500_counter) {                           \
+        c->stat_500_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_501_counter > c->stat_501_counter) {                           \
+        c->stat_501_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_502_counter > c->stat_502_counter) {                           \
+        c->stat_502_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_503_counter > c->stat_503_counter) {                           \
+        c->stat_503_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_504_counter > c->stat_504_counter) {                           \
+        c->stat_504_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_505_counter > c->stat_505_counter) {                           \
+        c->stat_505_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_506_counter > c->stat_506_counter) {                           \
+        c->stat_506_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_507_counter > c->stat_507_counter) {                           \
+        c->stat_507_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_508_counter > c->stat_508_counter) {                           \
+        c->stat_508_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_510_counter > c->stat_510_counter) {                           \
+        c->stat_510_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_511_counter > c->stat_511_counter) {                           \
+        c->stat_511_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_599_counter > c->stat_599_counter) {                           \
+        c->stat_599_counter_oc++;                                              \
+    }                                                                          \
     if (o->stat_request_time_counter > c->stat_request_time_counter) {         \
         c->stat_request_time_counter_oc++;                                     \
     }                                                                          \
@@ -176,6 +428,195 @@
     }                                                                          \
     if (o->stat_5xx_counter > c->stat_5xx_counter) {                           \
         c->stat_5xx_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_100_counter > c->stat_100_counter) {                           \
+        c->stat_100_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_101_counter > c->stat_101_counter) {                           \
+        c->stat_101_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_102_counter > c->stat_102_counter) {                           \
+        c->stat_102_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_200_counter > c->stat_200_counter) {                           \
+        c->stat_200_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_201_counter > c->stat_201_counter) {                           \
+        c->stat_201_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_202_counter > c->stat_202_counter) {                           \
+        c->stat_202_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_203_counter > c->stat_203_counter) {                           \
+        c->stat_203_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_204_counter > c->stat_204_counter) {                           \
+        c->stat_204_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_205_counter > c->stat_205_counter) {                           \
+        c->stat_205_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_206_counter > c->stat_206_counter) {                           \
+        c->stat_206_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_207_counter > c->stat_207_counter) {                           \
+        c->stat_207_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_208_counter > c->stat_208_counter) {                           \
+        c->stat_208_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_226_counter > c->stat_226_counter) {                           \
+        c->stat_226_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_300_counter > c->stat_300_counter) {                           \
+        c->stat_300_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_301_counter > c->stat_301_counter) {                           \
+        c->stat_301_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_302_counter > c->stat_302_counter) {                           \
+        c->stat_302_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_303_counter > c->stat_303_counter) {                           \
+        c->stat_303_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_304_counter > c->stat_304_counter) {                           \
+        c->stat_304_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_305_counter > c->stat_305_counter) {                           \
+        c->stat_305_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_307_counter > c->stat_307_counter) {                           \
+        c->stat_307_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_308_counter > c->stat_308_counter) {                           \
+        c->stat_308_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_400_counter > c->stat_400_counter) {                           \
+        c->stat_400_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_401_counter > c->stat_401_counter) {                           \
+        c->stat_401_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_402_counter > c->stat_402_counter) {                           \
+        c->stat_402_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_403_counter > c->stat_403_counter) {                           \
+        c->stat_403_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_404_counter > c->stat_404_counter) {                           \
+        c->stat_404_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_405_counter > c->stat_405_counter) {                           \
+        c->stat_405_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_406_counter > c->stat_406_counter) {                           \
+        c->stat_406_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_407_counter > c->stat_407_counter) {                           \
+        c->stat_407_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_408_counter > c->stat_408_counter) {                           \
+        c->stat_408_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_409_counter > c->stat_409_counter) {                           \
+        c->stat_409_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_410_counter > c->stat_410_counter) {                           \
+        c->stat_410_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_411_counter > c->stat_411_counter) {                           \
+        c->stat_411_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_412_counter > c->stat_412_counter) {                           \
+        c->stat_412_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_413_counter > c->stat_413_counter) {                           \
+        c->stat_413_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_414_counter > c->stat_414_counter) {                           \
+        c->stat_414_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_415_counter > c->stat_415_counter) {                           \
+        c->stat_415_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_416_counter > c->stat_416_counter) {                           \
+        c->stat_416_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_417_counter > c->stat_417_counter) {                           \
+        c->stat_417_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_418_counter > c->stat_418_counter) {                           \
+        c->stat_418_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_421_counter > c->stat_421_counter) {                           \
+        c->stat_421_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_422_counter > c->stat_422_counter) {                           \
+        c->stat_422_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_423_counter > c->stat_423_counter) {                           \
+        c->stat_423_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_424_counter > c->stat_424_counter) {                           \
+        c->stat_424_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_426_counter > c->stat_426_counter) {                           \
+        c->stat_426_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_428_counter > c->stat_428_counter) {                           \
+        c->stat_428_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_429_counter > c->stat_429_counter) {                           \
+        c->stat_429_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_431_counter > c->stat_431_counter) {                           \
+        c->stat_431_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_444_counter > c->stat_444_counter) {                           \
+        c->stat_444_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_451_counter > c->stat_451_counter) {                           \
+        c->stat_451_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_499_counter > c->stat_499_counter) {                           \
+        c->stat_499_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_500_counter > c->stat_500_counter) {                           \
+        c->stat_500_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_501_counter > c->stat_501_counter) {                           \
+        c->stat_501_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_502_counter > c->stat_502_counter) {                           \
+        c->stat_502_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_503_counter > c->stat_503_counter) {                           \
+        c->stat_503_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_504_counter > c->stat_504_counter) {                           \
+        c->stat_504_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_505_counter > c->stat_505_counter) {                           \
+        c->stat_505_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_506_counter > c->stat_506_counter) {                           \
+        c->stat_506_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_507_counter > c->stat_507_counter) {                           \
+        c->stat_507_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_508_counter > c->stat_508_counter) {                           \
+        c->stat_508_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_510_counter > c->stat_510_counter) {                           \
+        c->stat_510_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_511_counter > c->stat_511_counter) {                           \
+        c->stat_511_counter_oc++;                                              \
+    }                                                                          \
+    if (o->stat_599_counter > c->stat_599_counter) {                           \
+        c->stat_599_counter_oc++;                                              \
     }                                                                          \
     if (o->stat_request_time_counter > c->stat_request_time_counter) {         \
         c->stat_request_time_counter_oc++;                                     \

@@ -53,6 +53,69 @@
     "nginx_vts_server_requests_total{host=\"%V\",code=\"3xx\"} %uA\n"          \
     "nginx_vts_server_requests_total{host=\"%V\",code=\"4xx\"} %uA\n"          \
     "nginx_vts_server_requests_total{host=\"%V\",code=\"5xx\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"100\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"101\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"102\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"200\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"201\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"202\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"203\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"204\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"205\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"206\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"207\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"208\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"226\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"300\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"301\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"302\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"303\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"304\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"305\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"307\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"308\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"400\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"401\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"402\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"403\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"404\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"405\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"406\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"407\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"408\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"409\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"410\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"411\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"412\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"413\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"414\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"415\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"416\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"417\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"418\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"421\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"422\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"423\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"424\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"426\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"428\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"429\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"431\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"444\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"451\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"499\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"500\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"501\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"502\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"503\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"504\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"505\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"506\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"507\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"508\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"510\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"511\"} %uA\n"          \
+    "nginx_vts_server_requests_total{host=\"%V\",code=\"599\"} %uA\n"          \
     "nginx_vts_server_request_seconds_total{host=\"%V\"} %.3f\n"               \
     "nginx_vts_server_request_seconds{host=\"%V\"} %.3f\n"
 
@@ -74,7 +137,7 @@
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_CACHE_S            \
     "# HELP nginx_vts_server_cache_total The requests cache counter\n"         \
     "# TYPE nginx_vts_server_cache_total counter\n"
- 
+
 #define NGX_HTTP_VHOST_TRAFFIC_STATUS_PROMETHEUS_FMT_SERVER_CACHE              \
     "nginx_vts_server_cache_total{host=\"%V\",status=\"miss\"} %uA\n"          \
     "nginx_vts_server_cache_total{host=\"%V\",status=\"bypass\"} %uA\n"        \
@@ -107,15 +170,141 @@
     "nginx_vts_filter_bytes_total{filter=\"%V\",filter_name=\"%V\","           \
     "direction=\"out\"} %uA\n"                                                 \
     "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
-    "code=\"1xx\"} %uA\n"                                                 \
+    "code=\"1xx\"} %uA\n"                                                      \
     "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
-    "code=\"2xx\"} %uA\n"                                                 \
+    "code=\"2xx\"} %uA\n"                                                      \
     "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
-    "code=\"3xx\"} %uA\n"                                                 \
+    "code=\"3xx\"} %uA\n"                                                      \
     "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
-    "code=\"4xx\"} %uA\n"                                                 \
+    "code=\"4xx\"} %uA\n"                                                      \
     "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
-    "code=\"5xx\"} %uA\n"                                                 \
+    "code=\"5xx\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"100\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"101\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"102\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"200\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"201\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"202\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"203\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"204\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"205\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"206\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"207\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"208\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"226\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"300\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"301\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"302\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"303\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"304\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"305\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"307\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"308\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"400\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"401\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"402\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"403\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"404\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"405\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"406\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"407\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"408\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"409\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"410\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"411\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"412\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"413\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"414\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"415\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"416\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"417\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"418\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"421\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"422\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"423\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"424\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"426\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"428\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"429\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"431\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"444\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"451\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"499\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"500\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"501\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"502\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"503\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"504\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"505\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"506\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"507\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"508\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"510\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"511\"} %uA\n"                                                      \
+    "nginx_vts_filter_requests_total{filter=\"%V\",filter_name=\"%V\","        \
+    "code=\"599\"} %uA\n"                                                      \
     "nginx_vts_filter_request_seconds_total{filter=\"%V\","                    \
     "filter_name=\"%V\"} %.3f\n"                                               \
     "nginx_vts_filter_request_seconds{filter=\"%V\",filter_name=\"%V\"} %.3f\n"
@@ -199,6 +388,132 @@
     "code=\"4xx\"} %uA\n"                                                      \
     "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
     "code=\"5xx\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"100\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"101\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"102\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"200\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"201\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"202\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"203\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"204\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"205\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"206\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"207\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"208\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"226\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"300\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"301\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"302\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"303\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"304\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"305\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"307\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"308\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"400\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"401\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"402\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"403\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"404\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"405\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"406\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"407\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"408\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"409\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"410\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"411\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"412\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"413\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"414\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"415\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"416\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"417\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"418\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"421\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"422\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"423\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"424\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"426\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"428\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"429\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"431\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"444\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"451\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"499\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"500\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"501\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"502\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"503\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"504\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"505\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"506\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"507\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"508\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"510\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"511\"} %uA\n"                                                      \
+    "nginx_vts_upstream_requests_total{upstream=\"%V\",backend=\"%V\","        \
+    "code=\"599\"} %uA\n"                                                      \
     "nginx_vts_upstream_request_seconds_total{upstream=\"%V\","                \
     "backend=\"%V\"} %.3f\n"                                                   \
     "nginx_vts_upstream_request_seconds{upstream=\"%V\","                      \

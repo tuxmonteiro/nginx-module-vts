@@ -271,10 +271,73 @@ ngx_http_vhost_traffic_status_node_zero(ngx_http_vhost_traffic_status_node_t *vt
     vtsn->stat_in_bytes = 0;
     vtsn->stat_out_bytes = 0;
     vtsn->stat_1xx_counter = 0;
+    vtsn->stat_100_counter = 0;
+    vtsn->stat_101_counter = 0;
+    vtsn->stat_102_counter = 0;
     vtsn->stat_2xx_counter = 0;
+    vtsn->stat_200_counter = 0;
+    vtsn->stat_201_counter = 0;
+    vtsn->stat_202_counter = 0;
+    vtsn->stat_203_counter = 0;
+    vtsn->stat_204_counter = 0;
+    vtsn->stat_205_counter = 0;
+    vtsn->stat_206_counter = 0;
+    vtsn->stat_207_counter = 0;
+    vtsn->stat_208_counter = 0;
+    vtsn->stat_226_counter = 0;
     vtsn->stat_3xx_counter = 0;
+    vtsn->stat_300_counter = 0;
+    vtsn->stat_301_counter = 0;
+    vtsn->stat_302_counter = 0;
+    vtsn->stat_303_counter = 0;
+    vtsn->stat_304_counter = 0;
+    vtsn->stat_305_counter = 0;
+    vtsn->stat_307_counter = 0;
+    vtsn->stat_308_counter = 0;
     vtsn->stat_4xx_counter = 0;
+    vtsn->stat_400_counter = 0;
+    vtsn->stat_401_counter = 0;
+    vtsn->stat_402_counter = 0;
+    vtsn->stat_403_counter = 0;
+    vtsn->stat_404_counter = 0;
+    vtsn->stat_405_counter = 0;
+    vtsn->stat_406_counter = 0;
+    vtsn->stat_407_counter = 0;
+    vtsn->stat_408_counter = 0;
+    vtsn->stat_409_counter = 0;
+    vtsn->stat_410_counter = 0;
+    vtsn->stat_411_counter = 0;
+    vtsn->stat_412_counter = 0;
+    vtsn->stat_413_counter = 0;
+    vtsn->stat_414_counter = 0;
+    vtsn->stat_415_counter = 0;
+    vtsn->stat_416_counter = 0;
+    vtsn->stat_417_counter = 0;
+    vtsn->stat_418_counter = 0;
+    vtsn->stat_421_counter = 0;
+    vtsn->stat_422_counter = 0;
+    vtsn->stat_423_counter = 0;
+    vtsn->stat_424_counter = 0;
+    vtsn->stat_426_counter = 0;
+    vtsn->stat_428_counter = 0;
+    vtsn->stat_429_counter = 0;
+    vtsn->stat_431_counter = 0;
+    vtsn->stat_444_counter = 0;
+    vtsn->stat_451_counter = 0;
+    vtsn->stat_499_counter = 0;
     vtsn->stat_5xx_counter = 0;
+    vtsn->stat_500_counter = 0;
+    vtsn->stat_501_counter = 0;
+    vtsn->stat_502_counter = 0;
+    vtsn->stat_503_counter = 0;
+    vtsn->stat_504_counter = 0;
+    vtsn->stat_505_counter = 0;
+    vtsn->stat_506_counter = 0;
+    vtsn->stat_507_counter = 0;
+    vtsn->stat_508_counter = 0;
+    vtsn->stat_510_counter = 0;
+    vtsn->stat_511_counter = 0;
+    vtsn->stat_599_counter = 0;
 
     vtsn->stat_request_time_counter = 0;
     vtsn->stat_request_time = 0;
@@ -283,10 +346,73 @@ ngx_http_vhost_traffic_status_node_zero(ngx_http_vhost_traffic_status_node_t *vt
     vtsn->stat_in_bytes_oc = 0;
     vtsn->stat_out_bytes_oc = 0;
     vtsn->stat_1xx_counter_oc = 0;
+    vtsn->stat_100_counter_oc = 0;
+    vtsn->stat_101_counter_oc = 0;
+    vtsn->stat_102_counter_oc = 0;
     vtsn->stat_2xx_counter_oc = 0;
+    vtsn->stat_200_counter_oc = 0;
+    vtsn->stat_201_counter_oc = 0;
+    vtsn->stat_202_counter_oc = 0;
+    vtsn->stat_203_counter_oc = 0;
+    vtsn->stat_204_counter_oc = 0;
+    vtsn->stat_205_counter_oc = 0;
+    vtsn->stat_206_counter_oc = 0;
+    vtsn->stat_207_counter_oc = 0;
+    vtsn->stat_208_counter_oc = 0;
+    vtsn->stat_226_counter_oc = 0;
     vtsn->stat_3xx_counter_oc = 0;
+    vtsn->stat_300_counter_oc = 0;
+    vtsn->stat_301_counter_oc = 0;
+    vtsn->stat_302_counter_oc = 0;
+    vtsn->stat_303_counter_oc = 0;
+    vtsn->stat_304_counter_oc = 0;
+    vtsn->stat_305_counter_oc = 0;
+    vtsn->stat_307_counter_oc = 0;
+    vtsn->stat_308_counter_oc = 0;
     vtsn->stat_4xx_counter_oc = 0;
+    vtsn->stat_400_counter_oc = 0;
+    vtsn->stat_401_counter_oc = 0;
+    vtsn->stat_402_counter_oc = 0;
+    vtsn->stat_403_counter_oc = 0;
+    vtsn->stat_404_counter_oc = 0;
+    vtsn->stat_405_counter_oc = 0;
+    vtsn->stat_406_counter_oc = 0;
+    vtsn->stat_407_counter_oc = 0;
+    vtsn->stat_408_counter_oc = 0;
+    vtsn->stat_409_counter_oc = 0;
+    vtsn->stat_410_counter_oc = 0;
+    vtsn->stat_411_counter_oc = 0;
+    vtsn->stat_412_counter_oc = 0;
+    vtsn->stat_413_counter_oc = 0;
+    vtsn->stat_414_counter_oc = 0;
+    vtsn->stat_415_counter_oc = 0;
+    vtsn->stat_416_counter_oc = 0;
+    vtsn->stat_417_counter_oc = 0;
+    vtsn->stat_418_counter_oc = 0;
+    vtsn->stat_421_counter_oc = 0;
+    vtsn->stat_422_counter_oc = 0;
+    vtsn->stat_423_counter_oc = 0;
+    vtsn->stat_424_counter_oc = 0;
+    vtsn->stat_426_counter_oc = 0;
+    vtsn->stat_428_counter_oc = 0;
+    vtsn->stat_429_counter_oc = 0;
+    vtsn->stat_431_counter_oc = 0;
+    vtsn->stat_444_counter_oc = 0;
+    vtsn->stat_451_counter_oc = 0;
+    vtsn->stat_499_counter_oc = 0;
     vtsn->stat_5xx_counter_oc = 0;
+    vtsn->stat_500_counter_oc = 0;
+    vtsn->stat_501_counter_oc = 0;
+    vtsn->stat_502_counter_oc = 0;
+    vtsn->stat_503_counter_oc = 0;
+    vtsn->stat_504_counter_oc = 0;
+    vtsn->stat_505_counter_oc = 0;
+    vtsn->stat_506_counter_oc = 0;
+    vtsn->stat_507_counter_oc = 0;
+    vtsn->stat_508_counter_oc = 0;
+    vtsn->stat_510_counter_oc = 0;
+    vtsn->stat_511_counter_oc = 0;
+    vtsn->stat_599_counter_oc = 0;
     vtsn->stat_request_time_counter_oc = 0;
     vtsn->stat_response_time_counter_oc = 0;
 
@@ -670,6 +796,258 @@ ngx_http_vhost_traffic_status_node_member(ngx_http_vhost_traffic_status_node_t *
     else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "5xx") == 0)
     {
         return vtsn->stat_5xx_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "100") == 0)
+    {
+        return vtsn->stat_100_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "101") == 0)
+    {
+        return vtsn->stat_101_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "102") == 0)
+    {
+        return vtsn->stat_102_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "200") == 0)
+    {
+        return vtsn->stat_200_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "201") == 0)
+    {
+        return vtsn->stat_201_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "202") == 0)
+    {
+        return vtsn->stat_202_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "203") == 0)
+    {
+        return vtsn->stat_203_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "204") == 0)
+    {
+        return vtsn->stat_204_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "205") == 0)
+    {
+        return vtsn->stat_205_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "206") == 0)
+    {
+        return vtsn->stat_206_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "207") == 0)
+    {
+        return vtsn->stat_207_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "208") == 0)
+    {
+        return vtsn->stat_208_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "226") == 0)
+    {
+        return vtsn->stat_226_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "300") == 0)
+    {
+        return vtsn->stat_300_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "301") == 0)
+    {
+        return vtsn->stat_301_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "302") == 0)
+    {
+        return vtsn->stat_302_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "303") == 0)
+    {
+        return vtsn->stat_303_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "304") == 0)
+    {
+        return vtsn->stat_304_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "305") == 0)
+    {
+        return vtsn->stat_305_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "307") == 0)
+    {
+        return vtsn->stat_307_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "308") == 0)
+    {
+        return vtsn->stat_308_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "400") == 0)
+    {
+        return vtsn->stat_400_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "401") == 0)
+    {
+        return vtsn->stat_401_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "402") == 0)
+    {
+        return vtsn->stat_402_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "403") == 0)
+    {
+        return vtsn->stat_403_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "404") == 0)
+    {
+        return vtsn->stat_404_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "405") == 0)
+    {
+        return vtsn->stat_405_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "406") == 0)
+    {
+        return vtsn->stat_406_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "407") == 0)
+    {
+        return vtsn->stat_407_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "408") == 0)
+    {
+        return vtsn->stat_408_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "409") == 0)
+    {
+        return vtsn->stat_409_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "410") == 0)
+    {
+        return vtsn->stat_410_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "411") == 0)
+    {
+        return vtsn->stat_411_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "412") == 0)
+    {
+        return vtsn->stat_412_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "413") == 0)
+    {
+        return vtsn->stat_413_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "414") == 0)
+    {
+        return vtsn->stat_414_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "415") == 0)
+    {
+        return vtsn->stat_415_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "416") == 0)
+    {
+        return vtsn->stat_416_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "417") == 0)
+    {
+        return vtsn->stat_417_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "418") == 0)
+    {
+        return vtsn->stat_418_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "421") == 0)
+    {
+        return vtsn->stat_421_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "422") == 0)
+    {
+        return vtsn->stat_422_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "423") == 0)
+    {
+        return vtsn->stat_423_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "424") == 0)
+    {
+        return vtsn->stat_424_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "426") == 0)
+    {
+        return vtsn->stat_426_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "428") == 0)
+    {
+        return vtsn->stat_428_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "429") == 0)
+    {
+        return vtsn->stat_429_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "431") == 0)
+    {
+        return vtsn->stat_431_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "444") == 0)
+    {
+        return vtsn->stat_444_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "451") == 0)
+    {
+        return vtsn->stat_451_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "499") == 0)
+    {
+        return vtsn->stat_499_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "500") == 0)
+    {
+        return vtsn->stat_500_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "501") == 0)
+    {
+        return vtsn->stat_501_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "502") == 0)
+    {
+        return vtsn->stat_502_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "503") == 0)
+    {
+        return vtsn->stat_503_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "504") == 0)
+    {
+        return vtsn->stat_504_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "505") == 0)
+    {
+        return vtsn->stat_505_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "506") == 0)
+    {
+        return vtsn->stat_506_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "507") == 0)
+    {
+        return vtsn->stat_507_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "508") == 0)
+    {
+        return vtsn->stat_508_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "510") == 0)
+    {
+        return vtsn->stat_510_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "511") == 0)
+    {
+        return vtsn->stat_511_counter;
+    }
+    else if (ngx_http_vhost_traffic_status_node_member_cmp(member, "599") == 0)
+    {
+        return vtsn->stat_599_counter;
     }
 
 #if (NGX_HTTP_CACHE)

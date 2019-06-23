@@ -50,6 +50,321 @@ static ngx_http_variable_t  ngx_http_vhost_traffic_status_vars[] = {
       offsetof(ngx_http_vhost_traffic_status_node_t, stat_5xx_counter),
       NGX_HTTP_VAR_NOCACHEABLE, 0 },
 
+    { ngx_string("vts_100_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_100_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_101_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_101_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_102_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_102_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_200_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_200_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_201_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_201_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_202_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_202_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_203_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_203_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_204_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_204_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_205_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_205_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_206_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_206_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_207_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_207_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_208_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_208_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_226_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_226_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_300_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_300_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_301_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_301_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_302_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_302_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_303_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_303_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_304_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_304_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_305_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_305_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_307_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_307_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_308_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_308_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_400_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_400_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_401_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_401_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_402_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_402_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_403_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_403_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_404_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_404_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_405_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_405_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_406_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_406_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_407_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_407_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_408_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_408_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_409_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_409_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_410_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_410_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_411_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_411_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_412_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_412_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_413_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_413_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_414_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_414_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_415_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_415_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_416_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_416_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_417_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_417_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_418_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_418_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_421_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_421_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_422_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_422_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_423_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_423_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_424_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_424_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_426_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_426_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_428_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_428_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_429_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_429_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_431_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_431_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_444_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_444_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_451_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_451_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_499_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_499_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_500_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_500_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_501_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_501_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_502_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_502_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_503_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_503_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_504_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_504_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_505_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_505_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_506_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_506_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_507_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_507_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_508_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_508_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_510_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_510_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_511_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_511_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
+    { ngx_string("vts_599_counter"), NULL,
+      ngx_http_vhost_traffic_status_node_variable,
+      offsetof(ngx_http_vhost_traffic_status_node_t, stat_599_counter),
+      NGX_HTTP_VAR_NOCACHEABLE, 0 },
+
     { ngx_string("vts_request_time_counter"), NULL,
       ngx_http_vhost_traffic_status_node_variable,
       offsetof(ngx_http_vhost_traffic_status_node_t, stat_request_time_counter),
